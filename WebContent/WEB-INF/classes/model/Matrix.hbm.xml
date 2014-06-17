@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 25, 2014 9:04:43 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.Matrix" table="matrix" catalog="shable">
+        <id name="idMatrix" type="java.lang.Integer">
+            <column name="id_matrix" />
+            <generator class="identity" />
+        </id>
+        <property name="nomSalle" type="string">
+            <column name="nom_salle" length="20" not-null="true" />
+        </property>
+        <set name="matrixEntries" table="matrix_entry" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_matrix" not-null="true" />
+            </key>
+            <one-to-many class="model.MatrixEntry" />
+        </set>
+    </class>
+</hibernate-mapping>

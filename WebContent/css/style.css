@@ -1,0 +1,48 @@
+.row{
+	max-width: none;
+}
+
+.hidden{
+	display: none !important;
+}
+
+.error{
+	background-color: #000623; /* TODO palette */
+	color: #F0E3C0;
+	border: 1px solid #F0E3C0;
+}
+
+.error h3{
+	color: #F0E3C0;
+}
+
+body{
+	background-color: #8BA693;
+}
+
+.panel{
+	background-color: #4A6C74;
+	color: #F0E3C0;
+}
+
+.panel h3, .panel p, .panel h4{
+	color: #F0E3C0;
+}
+
+
+.bg img{
+	
+	max-width: 80%;
+	max-height: 80%;
+	display: block;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+.main{
+	
+	position: absolute;
+	top: 45px;
+	width: 100%;
+
+}
