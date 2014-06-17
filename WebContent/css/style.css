@@ -46,3 +46,10 @@ body{
 	width: 100%;
 
 }
+
+.columns{
+	display:table;
+}
+.panel{
+	display:table-cell;
+}

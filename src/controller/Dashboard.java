@@ -25,7 +25,7 @@ public class Dashboard extends HttpServlet {
 	private String nb_classe = "3";
 	
 
-    private Eleve marc = new Eleve("Bramaud", "Marc");
+    //private Eleve marc = new Eleve("Bramaud", "Marc");
 	
 	/* TODO When database is setup, these will be 
 	 * (respectively) ArrayList<Classe> and ArrayList<Matrix>*/
@@ -68,7 +68,7 @@ public class Dashboard extends HttpServlet {
 		list_classe.add(classe2);
 		list_classe.add(classe3);
 		
-		request.setAttribute("testEl", marc);
+		//request.setAttribute("testEl", marc);
 		request.setAttribute("list_salle", (ArrayList<String>)list_salle);
 		request.setAttribute("list_classe", (ArrayList<String>)list_classe);
 		request.setAttribute("nb_salle", nb_salle);
@@ -80,10 +80,34 @@ public class Dashboard extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String table = "TOTO";
-		table = request.getParameter("salle");
+		String result_salle = "TOTO";
+		result_salle = request.getParameter("salle");
+		String result_class = request.getParameter("classe");
 
-		System.out.println("La salle est:" + table);
+		System.out.println("La salle est:" + result_salle);
+		System.out.println("La classe est:" + result_class);
+		
+		ArrayList<String> result_tables = new ArrayList<String>();
+		ArrayList<String> result_students = new ArrayList<String>();
+		
+		result_tables.add("1");
+		result_students.add("Christophe Guillonnet");
+		list_salle.add(salle1);
+		list_salle.add(salle2);
+		
+		list_classe.add(classe1);
+		list_classe.add(classe2);
+		list_classe.add(classe3);
+		
+		request.setAttribute("result_tables", result_tables);
+		request.setAttribute("result_students", result_students);
+		request.setAttribute("result_salle", result_salle);
+		request.setAttribute("result_class", result_class);
+		//request.setAttribute("testEl", marc);
+		request.setAttribute("list_salle", (ArrayList<String>)list_salle);
+		request.setAttribute("list_classe", (ArrayList<String>)list_classe);
+		request.setAttribute("nb_salle", nb_salle);
+		request.setAttribute("nb_classe", nb_classe);
 		this.getServletContext().getRequestDispatcher( "/WEB-INF/private/dashboard.jsp" ).forward( request, response );
 	}
 

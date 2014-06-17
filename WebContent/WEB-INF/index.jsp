@@ -51,8 +51,6 @@
   <section class="top-bar-section">
     <ul class="right">
       <li class="active"><a href="statut">Statut</a></li>
-      <li class="active"><a href="#">Inscription</a></li>
-      <li class="active"><a href="login">Connexion</a></li>
     </ul>
   </section>
 </nav>

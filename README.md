@@ -1,7 +1,5 @@
 # Bienvenue sur le git de shable #
 
-toto
-
 ## Project ##
 
 Shable is the exam management utility you have always dreamt of. Using optimal treatment algorithms, Shable places your student in your exam rooms in the best possible way.

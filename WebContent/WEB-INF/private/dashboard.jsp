@@ -62,31 +62,15 @@
     <div class="row">
       <div class="large-12 small-12 columns">
         <h2>Dashboard</h2>
-        <p>Gérez les actions possibles avec votre compte Shable.</p>
+        <p>Gérez les actions possibles avec votre Shable.</p>
       </div>
     </div>
     <div class="row">
-      <div class="small-12 medium-6 large-6 columns">
-        <div class="panel">
-        <h3>Crééz une nouvelle salle ou une nouvelle liste d'élèves.</h3>
-        <p>Enregistrez une nouvelle salle ou une nouvelle classe dans notre base de données. <br>
-          Vous pourrez ensuite utiliser votre contenu personnel pour vos examens.</p>
-        <% String nb_salle = "0";
-        String nb_classe = "0";
-
-        nb_salle = (String)request.getAttribute("nb_salle");
-        nb_classe = (String)request.getAttribute("nb_classe");
-        %>
-        <p>Vous avez actuellement <% out.println(nb_salle); %> salles et <% out.println(nb_classe); %> listes d'élèves disponibles.</p>
-        <a href="new_salle"><span class="button">Nouvelle Salle</span></a>
-        <a href="new_classe"><span class="button">Nouvelle Classe</span></a>
-      </div>
-      </div>
       
       <div class="small-12 medium-6 large-6 columns">
         <div class="panel">
         <h3>Placez vos élèves pour un examen</h3>
-        <p>A partir de nos éléments génériques ou de ceux que vous avez rentrés auparavant, calculez grâce à notre algorithme la placement optimal de vos élèves pour l'un de vos examens.</p>
+        <p>Choisissez une salle et une liste d'élèves pour calculer le placement optimal grâce à notre alogrithme.</p>
 
         <form action="dashboard" method="post">
           <div class="row">
@@ -123,58 +107,46 @@
               </select>
             </div>
           </div>
-
-          <div class="row">
-            <div class="large-6 small-12 columns">
-              <label for="date_select">Date de l'examen</label>
-              <input type="date" name="date_select">
-            </div>
-            <div class="large-6 small-12 columns">
-              <label for="heure_select">Heure de l'examen</label>
-              <input type="time" name="heure_select">
-            </div>
-          </div>
           <input type="submit" class="button" value="Placer les élèves">
         </form>
-
-        <div id="container" class="large-6 small-12 columns"></div>
-        <script src="../js/vendor/sigma.min.js"></script>
-
-        <script>
-          var s = new sigma('container');
-
- s.graph.addNode({
-      // Main attributes:
-      id: 'n0',
-      label: 'Hello',
-      // Display attributes:
-      x: 0,
-      y: 0,
-      size: 1,
-      color: '#f00'
-    }).addNode({
-      // Main attributes:
-      id: 'n1',
-      label: 'World !',
-      // Display attributes:
-      x: 1,
-      y: 1,
-      size: 1,
-      color: '#00f'
-    }).addEdge({
-      id: 'e0',
-      // Reference extremities:
-      source: 'n0',
-      target: 'n1'
-    });
-
-    // Finally, let's ask our sigma instance to refresh:
-    s.refresh();
-        </script>
-
+        
+        
+        
       </div>
       </div>
-    </div>
+
+          <% if(request.getAttribute("result_salle")!=null){
+        String result_salle = (String)request.getAttribute("result_salle");
+        String result_class = (String)request.getAttribute("result_class");
+        ArrayList<String> result_tables = (ArrayList<String>)request.getAttribute("result_tables");
+        ArrayList<String> result_students = (ArrayList<String>)request.getAttribute("result_students");
+        %>
+      <div class="small-12 large-6 columns">
+        <div class="panel">
+        <div id="table-containerlarge-12" class="columns">
+          Vous avez sélectionné la salle <% out.println(result_salle); %> et la liste d'élèves <% out.println(result_class); %>.
+
+          <table>
+            <thead>
+              <th>Elève</th>
+              <th>Place</th>
+            </thead>
+            <tbody>
+            <% 
+            String student ="Marc";
+            String table = "25";
+             for(int i=0; i< result_tables.size(); i++){
+                  student = result_students.get(i);
+                  table = result_tables.get(i);
+                  out.println("<tr><td>" + student + "</td><td>" + table + "</td></tr>");
+                } %>
+            </tbody>
+
+          </table>
+        </div>
+        </div>
+      </div>
+        <% } %>
   </div>
 </section>
 
