@@ -80,7 +80,11 @@ public class Dashboard extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String table = "TOTO";
+		table = request.getParameter("salle");
+
+		System.out.println("La salle est:" + table);
+		this.getServletContext().getRequestDispatcher( "/WEB-INF/private/dashboard.jsp" ).forward( request, response );
 	}
 
 }
