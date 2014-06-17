@@ -45,8 +45,8 @@
     <web-resource-collection>
       <web-resource-name>Logging Area</web-resource-name>
       <description>
-              Authentication for registered users. 
-          </description>
+        Authentication for registered users. 
+      </description>
       <url-pattern>/private/test/*</url-pattern>
       <http-method>GET</http-method>
       <http-method>POST</http-method>
