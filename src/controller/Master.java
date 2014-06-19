@@ -45,7 +45,6 @@ public class Master {
 		 */
 		Enumeration<String> enumEleve = classe.getEleves().keys() ; 
 		Eleve eleve1 = classe.getEleves().get(enumEleve.nextElement()) ;
-		Table table2 = salle.getTables().get(0);
 		Enumeration<Integer> enumTable = salle.getTables().keys();
 		Table table1 = salle.getTables().get(enumTable.nextElement()) ;
 		eleve1.setTable(table1);

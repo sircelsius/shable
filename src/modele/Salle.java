@@ -36,14 +36,9 @@ public class Salle {
 
 	public void declencher(Ordre ordre){
 		this.setOrdre(ordre);
-		try {
-            Thread.sleep(1000);
             synchronized (declencheur) {
                 declencheur.notifyAll();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 	}
 	
 	private void setOrdre(Ordre ordre){
@@ -52,13 +47,6 @@ public class Salle {
 			tables.get(e.nextElement()).setOrdre(ordre);
 		}
 	}
-	
-//	public void setT(boolean occupee, ArrayList<Integer> T){
-//		Enumeration<Integer> e = tables.keys();
-//		while(e.hasMoreElements()){
-//			tables.get(e.nextElement()).setT(occupee, T);
-//		}
-//	}
 
 	public int getTableIsolee() {
 		Hashtable<Integer, Double> tableauMoyenneDistanceTableOccupee = new Hashtable<Integer, Double>(); 
@@ -95,7 +83,6 @@ public class Salle {
 	 * Ces informations sont evnoyées à TOUTES les tables.
 	 */
 	public void envoyerInformation(ArrayList<Integer> TO){
-		Enumeration<Integer> e = tables.keys();
 		// On crée nos 3 ArrayList que l'on va envoyer aux tables.
 		ArrayList<Integer> T = new ArrayList<Integer>() ;	// Va contenir les Ids des tables occupées.
 		ArrayList<Integer> x = new ArrayList<Integer>() ;	// Va contenir les abscisses des tables occupées
@@ -108,6 +95,7 @@ public class Salle {
 		}
 		
 		// On envoi ensuite ces informations à TOUTES les tables.
+		Enumeration<Integer> e = tables.keys();
 		while(e.hasMoreElements()){
 			getTables().get(e.nextElement()).recupererInformation(T, x, y);
 		}

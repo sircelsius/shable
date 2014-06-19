@@ -3,10 +3,6 @@ package modele ;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-
 import controller.Declencheur;
 import static java.lang.Math.hypot;
 
@@ -28,7 +24,7 @@ public class Table implements Runnable{
 	private ArrayList<Integer> ty = new ArrayList<Integer>() ;
 	
 	// Pour connaitre sa distance aux autres tables occupées : Hashtable<Clef = IdTable, Valeur = DistanceALaTable>
-	private Hashtable<Integer, Double> distanceAuxTablesOccupees;
+	private Hashtable<Integer, Double> distanceAuxTablesOccupees = new Hashtable<Integer, Double>();
 	private double moyennedistanceAuxTablesOccupees ;
 	
 	public Table(int x, int y, int id, Declencheur declencheur){
@@ -72,7 +68,6 @@ public class Table implements Runnable{
 		this.ordre = ordre ;
 	}
 	
-	
 	public ArrayList<Integer> getT(boolean libre){
 		/* Si libre est à true, on retourne l'ArrayList des Tables Libres (TL)
 		 * Sinon on retourne l'ArrayList des Tables Occupees (TO).
@@ -112,14 +107,16 @@ public class Table implements Runnable{
 					this.toString();
 					break;
 				case calcul_distance_aux_tables_occupees:
-					if(!this.occupee)
+					if(!this.occupee){
 						this.calculDistanceTablesOccupees();
 						this.moyennedistanceAuxTablesOccupees();
+					}
 						break;
 				default:
 					System.out.println("Cet ordre n'existe pas !\n");
 					break;
 			}
+			System.out.println("Je me rendors "+this.id);
 		}
 	}
 
