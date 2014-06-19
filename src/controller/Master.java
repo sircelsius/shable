@@ -13,16 +13,11 @@ public class Master {
 	public static void main(String[] args) {
 		System.out.println("Commencement de Master");
 		
-		/*
-		 * On commence par créer et remplir une classe d'élèves, et une salle de tables. 
-		 */
+		//On commence par créer et remplir une classe d'élèves, puis une salle de tables. 
 		Salle salle = Createur.creationSalle();
 		Classe classe = Createur.creationClasse();
-		salle.startTables();
-		
-//		// Petite phase d'initialisation, due à l'utilisation de CyclicBarrier.
-//		salle.setOrdre(Ordre.initialisation);
-//		salle.startTables();
+		salle.startTables();	// On démarre les threads associés à nos tables.
+
 		
 		Enumeration<String> g = classe.getEleves().keys();
 		String l = "" ;
@@ -31,24 +26,17 @@ public class Master {
 			System.out.println(l+"\n");
 		}
 		
-//		salle.setChaine("Helloooo");
-//		salle.startTables();
 		
-		// On affiche la chaine commune
-//		Enumeration<Integer> e = salle.getTables().keys();
-//		while(e.hasMoreElements()){
-//			salle.getTables().get(e.nextElement()).printChaine();
-//		}
-//		salle.setChaine("Yo");
-//		e = salle.getTables().keys();
-//		while(e.hasMoreElements()){
-//			salle.getTables().get(e.nextElement()).printChaine();
-//		}
-//		salle.setChaine("Yo");
-//		salle.startTables();
 		
-		/* On commence la phase d'initialisation */
-		salle.setOrdre(Ordre.calcul_distance_aux_tables_occupees);
+		/* *************************************
+		 * Le Programme est en deux parties :
+		 * 		- PHASE D'INITIALISATION
+		 * 		- PHASE DE RECUIT SIMULÉ
+		 * ************************************/
+		
+		
+		
+		 // On commence la PHASE D'INITIALISATION
 		ArrayList<Integer> TL = new ArrayList<Integer>(salle.getTables().keySet());	// TL est l'ArrayList des Tables Libres
 		ArrayList<Integer> TO = new ArrayList<Integer>() ;							// TO est l'ArrayList des Tables Occupées
 		/*
@@ -57,6 +45,7 @@ public class Master {
 		 */
 		Enumeration<String> enumEleve = classe.getEleves().keys() ; 
 		Eleve eleve1 = classe.getEleves().get(enumEleve.nextElement()) ;
+		Table table2 = salle.getTables().get(0);
 		Enumeration<Integer> enumTable = salle.getTables().keys();
 		Table table1 = salle.getTables().get(enumTable.nextElement()) ;
 		eleve1.setTable(table1);
@@ -71,7 +60,7 @@ public class Master {
 			// On envoi à toutes les tables la liste des tables occupées.
 			salle.envoyerInformation(TO);
 			// On dit aux tables de commencer à calculer leur distance aux autres tables qui sont occupées.
-			salle.declencher();
+			salle.declencher(Ordre.calcul_distance_aux_tables_occupees);
 			/*
 			 * Chacune des tables fait ensuite la moyenne de ses distances aux tables occupées.
 			 * On parcoure ensuite toutes ces moyennes, et on renvoi l'id de la table qui a la moyenne la plus élevée.
@@ -86,11 +75,12 @@ public class Master {
 			salle.getTables().get(idTableIsolee).setOccupee(true);
 		}
 		
+		
+		
 		/*
 		 * On affiche ensuite le résultat.
 		 */
-		salle.setOrdre(Ordre.affichage);
-		salle.startTables();
+		salle.declencher(Ordre.affichage);
 		
 	}
 }

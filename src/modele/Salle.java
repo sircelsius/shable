@@ -25,14 +25,6 @@ public class Salle {
 		this.declencheur = declencheur ;
 	}
 	
-	public void setChaine(String chaine){
-		Enumeration<Integer> e = tables.keys();
-		while(e.hasMoreElements()){
-			tables.get(e.nextElement()).setChaine(chaine);
-		}
-		
-	}
-
 	public void startTables(){
 		Enumeration<Integer> e = tables.keys();
 		while(e.hasMoreElements()){
@@ -42,7 +34,8 @@ public class Salle {
 		}
 	}
 
-	public void declencher(){
+	public void declencher(Ordre ordre){
+		this.setOrdre(ordre);
 		try {
             Thread.sleep(1000);
             synchronized (declencheur) {
@@ -53,7 +46,7 @@ public class Salle {
         }
 	}
 	
-	public void setOrdre(Ordre ordre){
+	private void setOrdre(Ordre ordre){
 		Enumeration<Integer> e = tables.keys();
 		while(e.hasMoreElements()){
 			tables.get(e.nextElement()).setOrdre(ordre);

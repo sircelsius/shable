@@ -18,9 +18,7 @@ public class Table implements Runnable{
 	private final int x ;
 	private final int y ;
 	private final int id ;
-	private boolean occupee = false ;	// true = occupe ; false = libre.
-	private Salle salle ;
-	private String chaineCommune = "" ;
+	private boolean occupee = false ;	// true = occupee ; false = libre.
 	private Ordre ordre = Ordre.affichage;
 
 	// Pour la phase d'initialisation
@@ -33,8 +31,12 @@ public class Table implements Runnable{
 	private Hashtable<Integer, Double> distanceAuxTablesOccupees;
 	private double moyennedistanceAuxTablesOccupees ;
 	
-//	// Pour la synchronisation des threads.
-//	private CyclicBarrier barrier ;
+	public Table(int x, int y, int id, Declencheur declencheur){
+		this.x = x ;
+		this.y = y ;
+		this.id = id ;
+		this.declencheur = declencheur ;
+	}
 	
 	public int getX(){
 		return this.x ;
@@ -47,11 +49,7 @@ public class Table implements Runnable{
 	public int getId(){
 		return this.id;
 	}
-	
-	public double getMoyennedistanceAuxTablesOccupees(){
-		return this.moyennedistanceAuxTablesOccupees ;
-	}
-	
+
 	public void setOccupee(boolean occupee){
 		this.occupee = occupee;
 	}
@@ -59,6 +57,21 @@ public class Table implements Runnable{
 	public boolean getOccupee(){
 		return this.occupee;
 	}
+	
+	public String toString(){
+		String statut = (occupee) ? "occupée" : "libre" ;
+		String res = "Je suis la table " + this.id + " de coordonnees (" + this.x + "," + this.y + ") et je suis " + statut ;
+		return res ;
+	}
+	
+	public double getMoyennedistanceAuxTablesOccupees(){
+		return this.moyennedistanceAuxTablesOccupees ;
+	}
+	
+	public void setOrdre(Ordre ordre) {
+		this.ordre = ordre ;
+	}
+	
 	
 	public ArrayList<Integer> getT(boolean libre){
 		/* Si libre est à true, on retourne l'ArrayList des Tables Libres (TL)
@@ -82,30 +95,8 @@ public class Table implements Runnable{
 		this.TO = TO ;
 	}
 	
-	public void printChaine(){
-		System.out.println(this.chaineCommune);
-	}
-	
-	public void setChaine(String chaine){
-		this.chaineCommune = chaine ;
-	}
-	
-	public Salle getSalle(){
-		return this.salle;
-	}
-
-	public Table(int x, int y, int id, Salle salle, Declencheur declencheur){
-		this.x = x ;
-		this.y = y ;
-		this.id = id ;
-		this.salle = salle ;
-		//int n = salle.getTables().size();
-		this.declencheur = declencheur ;
-	}
-
 	@Override
 	public void run() {
-		//CyclicBarrier barrier = new CyclicBarrier(24);
 		while(true){
 			synchronized (declencheur) {
 				try{
@@ -117,61 +108,38 @@ public class Table implements Runnable{
 			}
 			System.out.println("Je me réveille"+this.id+"\n");
 			switch(this.ordre){
-//			case initialisation:
-//				this.barrier = new CyclicBarrier(this.salle.getTables().size());
-//				break;
-			case affichage:
-				String statut = this.occupee ? "occupé" : "libre" ;
-				System.out.print("Je suis la table "+this.id+" et je suis "+statut+".\n");
-	//			this.printChaine();
-	//			try {
-	//				barrier.await();
-	//			} catch (InterruptedException | BrokenBarrierException e) {
-	//				e.printStackTrace();
-	//			}
-				break;
-			case calcul_distance_aux_tables_occupees:
-				if(!this.occupee)
-					this.calculDistanceTablesOccupees();
-					this.moyennedistanceAuxTablesOccupees();
-//					try {
-//						barrier.await();
-//					} catch (InterruptedException | BrokenBarrierException e) {
-//						e.printStackTrace();
-//					}
+				case affichage:
+					this.toString();
 					break;
-			default:
-				System.out.println("Cet ordre n'existe pas !\n");
-				break;
+				case calcul_distance_aux_tables_occupees:
+					if(!this.occupee)
+						this.calculDistanceTablesOccupees();
+						this.moyennedistanceAuxTablesOccupees();
+						break;
+				default:
+					System.out.println("Cet ordre n'existe pas !\n");
+					break;
 			}
 		}
 	}
 
-	public void setOrdre(Ordre ordre) {
-		this.ordre = ordre ;
-	}
 
 	/*
 	 * Cette méthode rentre dans le tableau "distanceAuxTablesOccupees" les
 	 * distances entre "this" table et les autres tables occupees.
 	 */
 	public void calculDistanceTablesOccupees(){
-		Iterator<Integer> i = this.TO.iterator() ;
-		int id ;
-		while(i.hasNext()){
-			id = i.next();
-			distanceAuxTablesOccupees.put(id, distance(salle.getTables().get(id)));
+		int taille = this.TO.size();
+		double a = 0 ;
+		for(int i = 0 ; i < taille ; i++ ){
+			a = hypot((double)(this.tx.get(i) - this.x), ((double)(this.tx.get(i) - this.x)));
+			distanceAuxTablesOccupees.put(this.TO.get(i), a);
+			System.out.println("Ma distance à la table :"+a);
 		}
 	}
 	
-	public double distance(Table table){
-		return hypot((double)(table.getY() - this.y), (double)(table.getX() - this.x));
-	}
 	
-	/*
-	 * Cette méthode calcule la moyenne des distances entre "this" table
-	 * et les autres tables occupees.
-	 */
+	//Fais la moyenne des distances entre "this" table et les tables occupees.
 	public double moyennedistanceAuxTablesOccupees(){
 		Enumeration<Integer> e = distanceAuxTablesOccupees.keys();
 		double res = 0 ;
