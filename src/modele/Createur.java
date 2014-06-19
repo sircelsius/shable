@@ -2,6 +2,8 @@ package modele;
 
 import java.util.Hashtable ;
 
+import controller.Declencheur;
+
 public class Createur {
 	public static Classe creationClasse(){
 		// On crée la classe que l'on va retourner.
@@ -35,35 +37,37 @@ public class Createur {
 	}
 	
 	public static Salle creationSalle(){
+		Declencheur declencheur = new Declencheur();
+		
 		// On crée la salle que l'on va retourner
 		Hashtable<Integer, Table> tables = new Hashtable<Integer, Table>() ;
-		Salle salle = new Salle("TG-215", tables) ;
+		Salle salle = new Salle("TG-215", tables, declencheur) ;
 
 		// On crée nos tables que l'on va ajouter à notre salle.
-		Table table1 = new Table(5, 5, 1, salle);
-		Table table2 = new Table(5, 10, 2, salle);
-		Table table3 = new Table(5, 15, 3, salle);
-		Table table4 = new Table(5, 20, 4, salle);
-		Table table5 = new Table(5, 25, 5, salle);
-		Table table6 = new Table(5, 30, 6, salle);
-		Table table7 = new Table(10, 5, 7, salle);
-		Table table8 = new Table(10, 10, 8, salle);
-		Table table9 = new Table(10, 15, 9, salle);
-		Table table10 = new Table(10, 20, 10, salle);
-		Table table11 = new Table(10, 25, 11, salle);
-		Table table12 = new Table(10, 30, 12, salle);
-		Table table13 = new Table(15, 5, 13, salle);
-		Table table14 = new Table(15, 10, 14, salle);
-		Table table15 = new Table(15, 15, 15, salle);
-		Table table16 = new Table(15, 20, 16, salle);
-		Table table17 = new Table(15, 25, 17, salle);
-		Table table18 = new Table(15, 30, 18, salle);
-		Table table19 = new Table(20, 5, 19, salle);
-		Table table20 = new Table(20, 10, 20, salle);
-		Table table21 = new Table(20, 15, 21, salle);
-		Table table22 = new Table(20, 20, 22, salle);
-		Table table23 = new Table(20, 25, 23, salle);
-		Table table24 = new Table(20, 30, 24, salle);
+		Table table1 = new Table(5, 5, 1, salle, declencheur);
+		Table table2 = new Table(5, 10, 2, salle, declencheur);
+		Table table3 = new Table(5, 15, 3, salle, declencheur);
+		Table table4 = new Table(5, 20, 4, salle, declencheur);
+		Table table5 = new Table(5, 25, 5, salle, declencheur);
+		Table table6 = new Table(5, 30, 6, salle, declencheur);
+		Table table7 = new Table(10, 5, 7, salle, declencheur);
+		Table table8 = new Table(10, 10, 8, salle, declencheur);
+		Table table9 = new Table(10, 15, 9, salle, declencheur);
+		Table table10 = new Table(10, 20, 10, salle, declencheur);
+		Table table11 = new Table(10, 25, 11, salle, declencheur);
+		Table table12 = new Table(10, 30, 12, salle, declencheur);
+		Table table13 = new Table(15, 5, 13, salle, declencheur);
+		Table table14 = new Table(15, 10, 14, salle, declencheur);
+		Table table15 = new Table(15, 15, 15, salle, declencheur);
+		Table table16 = new Table(15, 20, 16, salle, declencheur);
+		Table table17 = new Table(15, 25, 17, salle, declencheur);
+		Table table18 = new Table(15, 30, 18, salle, declencheur);
+		Table table19 = new Table(20, 5, 19, salle, declencheur);
+		Table table20 = new Table(20, 10, 20, salle, declencheur);
+		Table table21 = new Table(20, 15, 21, salle, declencheur);
+		Table table22 = new Table(20, 20, 22, salle, declencheur);
+		Table table23 = new Table(20, 25, 23, salle, declencheur);
+		Table table24 = new Table(20, 30, 24, salle, declencheur);
 
 		tables.put(table1.getId(), table1);
 		tables.put(table2.getId(), table2);
