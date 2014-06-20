@@ -50,14 +50,15 @@ public class Salle {
 
 	public int getTableIsolee() {
 		Hashtable<Integer, Double> tableauMoyenneDistanceTableOccupee = new Hashtable<Integer, Double>(); 
-		// Hashtable<IdTable, MoyenneDeSesDistancesAuxAutresTablesLibres>
 		
 		// On remplit cette Hashtable avec les résultats des autres tables.
 		Enumeration<Integer> e = getTables().keys();
 		int id ;
 		while(e.hasMoreElements()){
 			id = e.nextElement();
-			tableauMoyenneDistanceTableOccupee.put(id, getTables().get(id).getMoyennedistanceAuxTablesOccupees());
+			// Seul les tables libres ajoutent leur moyenne à ce tableau.
+			if(!getTables().get(id).getOccupee())
+				tableauMoyenneDistanceTableOccupee.put(id, getTables().get(id).getMoyennedistanceAuxTablesOccupees());
 		}
 		
 		// On parcoure cette Hashtable pour trouver la table qui a les distances les plus élevées (la plus isolée en fait.
@@ -66,7 +67,7 @@ public class Salle {
 		double max = tableauMoyenneDistanceTableOccupee.get(maxId) ;
 		while(f.hasMoreElements()){
 			id = f.nextElement();
-			if(tableauMoyenneDistanceTableOccupee.get(id) < max){
+			if(tableauMoyenneDistanceTableOccupee.get(id) > max){
 				max = tableauMoyenneDistanceTableOccupee.get(id);
 				maxId = id ;
 			}	

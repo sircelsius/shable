@@ -95,13 +95,13 @@ public class Table implements Runnable{
 		while(true){
 			synchronized (declencheur) {
 				try{
-					System.out.println("je suis en attente "+this.id+"\n");
+					//System.out.println("je suis en attente "+this.id+"\n");
 					declencheur.wait();
 				}catch(InterruptedException e){
 					e.printStackTrace();
 				}
 			}
-			System.out.println("Je me réveille"+this.id+"\n");
+			//System.out.println("Je me réveille"+this.id+"\n");
 			switch(this.ordre){
 				case affichage:
 					this.toString();
@@ -110,13 +110,14 @@ public class Table implements Runnable{
 					if(!this.occupee){
 						this.calculDistanceTablesOccupees();
 						this.moyennedistanceAuxTablesOccupees();
+						//System.out.println("Je suis "+this.id +"et ma moyenne vaut "+this.moyennedistanceAuxTablesOccupees);
 					}
 						break;
 				default:
 					System.out.println("Cet ordre n'existe pas !\n");
 					break;
 			}
-			System.out.println("Je me rendors "+this.id);
+			//System.out.println("Je me rendors "+this.id);
 		}
 	}
 
@@ -131,19 +132,19 @@ public class Table implements Runnable{
 		for(int i = 0 ; i < taille ; i++ ){
 			a = hypot((double)(this.ty.get(i) - this.y), ((double)(this.tx.get(i) - this.x)));
 			distanceAuxTablesOccupees.put(this.TO.get(i), a);
-			System.out.println("Ma distance à la table :"+a);
+			//System.out.println("Ma distance à la table :"+a);
 		}
 	}
 	
 	
 	//Fais la moyenne des distances entre "this" table et les tables occupees.
-	public double moyennedistanceAuxTablesOccupees(){
+	public void moyennedistanceAuxTablesOccupees(){
 		Enumeration<Integer> e = distanceAuxTablesOccupees.keys();
 		double res = 0 ;
 		// On somme l'ensemble des distances entre cette tables et les tables occuppées, on divise ensuite.
 		while(e.hasMoreElements()){ res += distanceAuxTablesOccupees.get(e.nextElement()) ; }
 		res /= distanceAuxTablesOccupees.size() ;
-		return res ;
+		this.moyennedistanceAuxTablesOccupees = res ;
 	}
 
 	

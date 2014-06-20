@@ -37,7 +37,7 @@ public class Master {
 		
 		
 		 // On commence la PHASE D'INITIALISATION
-		ArrayList<Integer> TL = new ArrayList<Integer>(salle.getTables().keySet());	// TL est l'ArrayList des Tables Libres
+		//ArrayList<Integer> TL = new ArrayList<Integer>(salle.getTables().keySet());	// TL est l'ArrayList des Tables Libres
 		ArrayList<Integer> TO = new ArrayList<Integer>() ;							// TO est l'ArrayList des Tables Occupées
 		/*
 		 *  On place le 1er élève à sa table, on set la table à occupé,
@@ -55,10 +55,11 @@ public class Master {
 		 * Je continue de la même manière dans la boucle qui suit et place tout les élèves.
 		 * Après ce premier "placage", on commence la vraie initialisation.
 		 */
+		int i = 0 ;
 		while(enumEleve.hasMoreElements()){
 			// On envoi à toutes les tables la liste des tables occupées.
 			salle.envoyerInformation(TO);
-			// On dit aux tables de commencer à calculer leur distance aux autres tables qui sont occupées.
+			// On dit aux tables libres de commencer à calculer leur distance aux autres tables qui sont occupées.
 			salle.declencher(Ordre.calcul_distance_aux_tables_occupees);
 			/*
 			 * Chacune des tables fait ensuite la moyenne de ses distances aux tables occupées.
@@ -66,16 +67,18 @@ public class Master {
 			 * Cet Id correpsond à la table la plus isolée.
 			 */
 			int idTableIsolee = salle.getTableIsolee();
+			System.out.println("Iteration "+i+" La table la plus isolée est "+idTableIsolee);
 			// On attribue la table la plus isolée à l'élève courant.
 			classe.getEleves().get(enumEleve.nextElement()).setTable(salle.getTables().get(idTableIsolee));
 			// On ajoute ensuite cette table à la liste des tables occupées (TO).
 			TO.add(idTableIsolee);
 			// Enfin, on set la table à occupée.
 			salle.getTables().get(idTableIsolee).setOccupee(true);
+			i++;
 		}
 		
 		
-		
+		System.out.println("PHASE D'INITIALISATION TERMINÉE.");
 		/*
 		 * On affiche ensuite le résultat.
 		 */
