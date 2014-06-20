@@ -10,4 +10,13 @@ public class Classe {
 		this.nom = nom ;
 		this.eleves = eleves ;
 	}
+
+	public Hashtable<String, Eleve> getEleves() {
+		return eleves;
+	}
+	
+	public String getNom(){
+		return this.nom ;
+	}
+	
 }
