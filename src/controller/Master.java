@@ -36,13 +36,12 @@ public class Master {
 		
 		
 		
-		 // On commence la PHASE D'INITIALISATION
+		// On commence la PHASE D'INITIALISATION
 		//ArrayList<Integer> TL = new ArrayList<Integer>(salle.getTables().keySet());	// TL est l'ArrayList des Tables Libres
 		ArrayList<Integer> TO = new ArrayList<Integer>() ;							// TO est l'ArrayList des Tables Occupées
-		/*
-		 *  On place le 1er élève à sa table, on set la table à occupé,
-		 *  et on ajoute cette table à la liste des tables occupées. 
-		 */
+		/*On place le 1er élève à sa table, on set la table à occupé,
+		 *  on ajoute cette table à la liste des tables occupées,
+		 *  et je retire cette table de la liste des tables libres.*/
 		Enumeration<String> enumEleve = classe.getEleves().keys() ; 
 		Eleve eleve1 = classe.getEleves().get(enumEleve.nextElement()) ;
 		Enumeration<Integer> enumTable = salle.getTables().keys();
@@ -50,6 +49,7 @@ public class Master {
 		eleve1.setTable(table1);
 		table1.setOccupee(true);
 		TO.add(table1.getId());
+		//TL.remove(table1.getId());
 		/*
 		 * Juste pour l'exemple, je retire la table choisie TL et l'ajoute à TO.
 		 * Je continue de la même manière dans la boucle qui suit et place tout les élèves.
@@ -60,7 +60,10 @@ public class Master {
 			// On envoi à toutes les tables la liste des tables occupées.
 			salle.envoyerInformation(TO);
 			// On dit aux tables libres de commencer à calculer leur distance aux autres tables qui sont occupées.
+			salle.setTacheTerminee(false);
 			salle.declencher(Ordre.calcul_distance_aux_tables_occupees);
+			//On attends que toutes les tables ait terminéee leur tache.
+			while(!salle.getTacheTerminee()){}
 			/*
 			 * Chacune des tables fait ensuite la moyenne de ses distances aux tables occupées.
 			 * On parcoure ensuite toutes ces moyennes, et on renvoi l'id de la table qui a la moyenne la plus élevée.
@@ -70,8 +73,9 @@ public class Master {
 			System.out.println("Iteration "+i+" La table la plus isolée est "+idTableIsolee);
 			// On attribue la table la plus isolée à l'élève courant.
 			classe.getEleves().get(enumEleve.nextElement()).setTable(salle.getTables().get(idTableIsolee));
-			// On ajoute ensuite cette table à la liste des tables occupées (TO).
+			// On ajoute/retire ensuite cette table à la liste des tables occupées (TO)/tables libres (TL).
 			TO.add(idTableIsolee);
+			//TL.remove(idTableIsolee);
 			// Enfin, on set la table à occupée.
 			salle.getTables().get(idTableIsolee).setOccupee(true);
 			i++;
@@ -83,6 +87,13 @@ public class Master {
 		 * On affiche ensuite le résultat.
 		 */
 		salle.declencher(Ordre.affichage);
+		
+		// On commence la PHASE DE RECUIT SIMULÉ
+		/* Toutes les tables occupées calule ensuite leur coefficient de triche.
+		 * Je retransmet l'info de la même manière.*/
+		
+		salle.envoyerInformation(TO);					// Encore une fois j'envoi à toutes les tables les coordonnées des tables occupées.
+		salle.declencher(Ordre.calcul_coeff_triche); 	
 		
 	}
 }

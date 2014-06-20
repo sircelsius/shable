@@ -9,6 +9,7 @@ import static java.lang.Math.hypot;
 public class Table implements Runnable{
 	// Cet objet va être le déclencheur d'action de nos tables
 	private Declencheur declencheur ;
+	private boolean tacheTerminee = false ;
 	
 	// Coordonnées de la table
 	private final int x ;
@@ -19,7 +20,7 @@ public class Table implements Runnable{
 
 	// Pour la phase d'initialisation
 	private ArrayList<Integer> TL = new ArrayList<Integer>() ; // Les tables libres
-	private ArrayList<Integer> TO = new ArrayList<Integer>() ; // Les tables libres
+	private ArrayList<Integer> TO = new ArrayList<Integer>() ; // Les tables occupees.
 	private ArrayList<Integer> tx = new ArrayList<Integer>() ;
 	private ArrayList<Integer> ty = new ArrayList<Integer>() ;
 	
@@ -44,6 +45,14 @@ public class Table implements Runnable{
 
 	public int getId(){
 		return this.id;
+	}
+	
+	public boolean getTacheTerminee(){
+		return this.tacheTerminee ;
+	}
+	
+	public void setTacheTerminee(boolean b){
+		this.tacheTerminee = b ;
 	}
 
 	public void setOccupee(boolean occupee){
@@ -90,9 +99,53 @@ public class Table implements Runnable{
 		this.TO = TO ;
 	}
 	
+	/*
+	 * Cette méthode rentre dans le tableau "distanceAuxTablesOccupees" les
+	 * distances entre "this" table et les autres tables occupees.
+	 */
+	private void calculDistanceTablesOccupees(){
+		int taille = this.TO.size();
+		double a = 0 ;
+		for(int i = 0 ; i < taille ; i++ ){
+			a = hypot((double)(this.ty.get(i) - this.y), ((double)(this.tx.get(i) - this.x)));
+			this.distanceAuxTablesOccupees.put(this.TO.get(i), a);
+			//System.out.println("Ma distance à la table :"+a);
+		}
+	}
+	
+	
+	//Fais la moyenne d'une Hashtable.
+	private double moyenne(Hashtable<Integer, Double> h){
+		Enumeration<Integer> e = h.keys();
+		double res = 0 ;
+		// On somme l'ensemble des distances entre cette tables et les tables occuppées, on divise ensuite.
+		while(e.hasMoreElements()){ res += h.get(e.nextElement()) ; }
+		res /= h.size() ;
+		return res ;
+	}
+	
+	/*
+	 * Cette méthode permet de récupérer les infos nécessaires au calcul des distances pour la phase d'initialisation.
+	 * Je fais une copie pour éviter que mes tables essayent d'accéder aux même variables.
+	 * Je ne voulais pas utiliser le bloc "synchronised" pour ne pas perdre l'intérêt du multi-thread.*/
+	public void recupererInformation(ArrayList<Integer> t, ArrayList<Integer> ptx, ArrayList<Integer> pty) {
+		int taille = t.size() ;
+		for(int i = 0 ; i < taille; i++){
+			/*
+			 * En faisant ce qui suit, je m'assure de faire une "deep copy" des objets en paramètres de la méthode.
+			 * Ainsi, lorsque toutes les tables commenceront à faire leur calcul, je n'aurai pas de problèmes d'accès concurrents à la mémoire.
+			 */
+			this.TO.add(i, t.get(i)) ;
+			this.tx.add(i, ptx.get(i));
+			this.ty.add(i, pty.get(i));
+		}
+		
+	}
+
 	@Override
 	public void run() {
 		while(true){
+			this.tacheTerminee = true ;
 			synchronized (declencheur) {
 				try{
 					//System.out.println("je suis en attente "+this.id+"\n");
@@ -107,12 +160,24 @@ public class Table implements Runnable{
 					this.toString();
 					break;
 				case calcul_distance_aux_tables_occupees:
+					// Seule les tables libres examinent leur distance à leur voisines occupées.
 					if(!this.occupee){
 						this.calculDistanceTablesOccupees();
-						this.moyennedistanceAuxTablesOccupees();
+						moyennedistanceAuxTablesOccupees = this.moyenne(distanceAuxTablesOccupees);
 						//System.out.println("Je suis "+this.id +"et ma moyenne vaut "+this.moyennedistanceAuxTablesOccupees);
 					}
-						break;
+					break;
+				case calcul_coeff_triche:
+					/* Le coefficient de triche correspond à la capacité d'un élève à tricher.
+					 * Le coefficient de triche d'un élève est donc la moyenne des distances aux autres élèves.
+					 * Ici l'élève est symbolisé par une table occupée. => seules les tables occupées font ce calcul.*/
+					if(this.occupee){
+						// Les tables occupées calculent leur distances aux autres tables occupées.
+						this.calculDistanceTablesOccupees();
+						moyennedistanceAuxTablesOccupees = this.moyenne(distanceAuxTablesOccupees);
+					}
+					
+					break;
 				default:
 					System.out.println("Cet ordre n'existe pas !\n");
 					break;
@@ -122,48 +187,5 @@ public class Table implements Runnable{
 	}
 
 
-	/*
-	 * Cette méthode rentre dans le tableau "distanceAuxTablesOccupees" les
-	 * distances entre "this" table et les autres tables occupees.
-	 */
-	public void calculDistanceTablesOccupees(){
-		int taille = this.TO.size();
-		double a = 0 ;
-		for(int i = 0 ; i < taille ; i++ ){
-			a = hypot((double)(this.ty.get(i) - this.y), ((double)(this.tx.get(i) - this.x)));
-			distanceAuxTablesOccupees.put(this.TO.get(i), a);
-			//System.out.println("Ma distance à la table :"+a);
-		}
-	}
-	
-	
-	//Fais la moyenne des distances entre "this" table et les tables occupees.
-	public void moyennedistanceAuxTablesOccupees(){
-		Enumeration<Integer> e = distanceAuxTablesOccupees.keys();
-		double res = 0 ;
-		// On somme l'ensemble des distances entre cette tables et les tables occuppées, on divise ensuite.
-		while(e.hasMoreElements()){ res += distanceAuxTablesOccupees.get(e.nextElement()) ; }
-		res /= distanceAuxTablesOccupees.size() ;
-		this.moyennedistanceAuxTablesOccupees = res ;
-	}
 
-	
-	/*
-	 * Cette méthode permet de récupérer les infos nécessaires au calcul des distances pour la phase d'initialisation.
-	 * Je fais une copie pour éviter que mes tables essayent d'accéder aux même variables.
-	 * Je ne voulais pas utiliser le bloc "synchronised" pour ne pas perdre l'intérêt du multi-thread.
-	 */
-	public void recupererInformation(ArrayList<Integer> t, ArrayList<Integer> ptx, ArrayList<Integer> pty) {
-		int taille = t.size() ;
-		for(int i = 0 ; i < taille; i++){
-			/*
-			 * En faisant ce qui suit, je m'assure de faire une "deep copy" des objets en paramètres de la méthode.
-			 * Ainsi, lorsque toutes les tables commenceront à faire leur calcul, je n'aurai pas de problèmes d'accès concurrents à la mémoire.
-			 */
-			this.TO.add(i, t.get(i)) ;
-			this.tx.add(i, ptx.get(i));
-			this.ty.add(i, pty.get(i));
-		}
-		
-	}
 }
