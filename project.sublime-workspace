@@ -1,0 +1,728 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"pro",
+				"proxyreponse"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/modele/Classe.java",
+			"settings":
+			{
+				"buffer_size": 252,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/modele/Createur.java",
+			"settings":
+			{
+				"buffer_size": 3589,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/modele/Eleve.java",
+			"settings":
+			{
+				"buffer_size": 527,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/modele/Ordre.java",
+			"settings":
+			{
+				"buffer_size": 451,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/modele/Salle.java",
+			"settings":
+			{
+				"buffer_size": 939,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "WebContent/WEB-INF/private/dashboard.jsp",
+			"settings":
+			{
+				"buffer_size": 7170,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/modele/Table.java",
+			"settings":
+			{
+				"buffer_size": 1993,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/controller/Dashboard.java",
+			"settings":
+			{
+				"buffer_size": 3682,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 211.0,
+		"selected_items":
+		[
+			[
+				"projec",
+				"Project: Save As"
+			],
+			[
+				"save",
+				"File: Save All"
+			],
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"project",
+				"Project: Add Folder"
+			],
+			[
+				"rena",
+				"File: Rename"
+			],
+			[
+				"rename",
+				"File: Rename"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"proje",
+				"Project: Add Folder"
+			],
+			[
+				"side bar",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"side",
+				"Preferences: Settings - Default"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"terminal",
+				"Preferences: Terminal Key Bindings – Default"
+			],
+			[
+				"instla",
+				"Package Control: Install Package"
+			],
+			[
+				"shell",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"instl",
+				"Package Control: Install Package"
+			],
+			[
+				"java",
+				"Set Syntax: Java"
+			],
+			[
+				"lis pa",
+				"Package Control: List Packages"
+			],
+			[
+				"con ins",
+				"Package Control: Install Package"
+			],
+			[
+				"saa",
+				"File: Save All"
+			],
+			[
+				"todone",
+				"Set Syntax: ToDone"
+			],
+			[
+				"plain",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"jav",
+				"Set Syntax: Java"
+			],
+			[
+				"sftp",
+				"SFTP: Browse Server…"
+			],
+			[
+				"lis",
+				"Permute Lines: Shuffle"
+			],
+			[
+				"shel",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 572.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/mboucheron/Documents/travail/ShableLeRetour/WebContent/WEB-INF/private/.fuse_hidden0000431500000006",
+		"/home/mboucheron/Documents/travail/ShableLeRetour/src/controller/Dashboard.java",
+		"/home/mboucheron/Documents/travail/ShableLeRetour/WebContent/WEB-INF/private/dashboard.jsp",
+		"/home/mboucheron/Documents/travail/ShableLeRetour/WebContent/js/dashboard.js",
+		"/home/mboucheron/Documents/travail/ShableLeRetour/WebContent/css/dashboard.css",
+		"/home/mboucheron/Documents/travail/shable/WebContent/WEB-INF/index.jsp",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/grails-app/views/layouts/main.gsp",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn.sublime-project",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/stacktrace.log",
+		"/home/mboucheron/Documents/travail/shable/WebContent/css/style.css",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/web-app/css/mobile.css",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/plugins/resources-1.2.7/src/groovy/org/grails/plugin/resource/module/ModuleDeclarationsFactory.groovy",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/plugins/resources-1.2.7/src/groovy/org/grails/plugin/resource/DevModeSanityFilter.groovy",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/plugins/resources-1.2.7/src/java/org/grails/plugin/resources/artefacts/ResourceMapperArtefactHandler.java",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/plugins/resources-1.2.7/src/groovy/org/grails/plugin/resource/ResourceMeta.groovy",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/plugins/cache-1.1.1/src/java/grails/plugin/cache/web/filter/NoOpFilter.java",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/grails-app/i18n/messages_nb.properties",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/web-app/WEB-INF/tld/fmt.tld",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/grails-app/views/class/_form.gsp",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/plugins/cache-1.1.1/src/java/grails/plugin/cache/web/filter/FilterServletOutputStream.java",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/plugins/tomcat-7.0.52.1/src/groovy/org/grails/plugins/tomcat/fork/TomcatWarRunner.groovy",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/plugins/resources-1.2.7/grails-app/conf/ResourcesBootStrap.groovy",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/plugins/hibernate-3.6.10.9/src/docs/ref/Domain/merge.gdoc",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/grails-app/views/home/index.gsp",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/test/unit/com/shablereborn/HomeControllerSpec.groovy",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/grails-app/controllers/com/shablereborn/HomeController.groovy",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/resources/hibernate.cfg.xml",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/web-app/js/application.js",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/classes/application.properties",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/application.properties",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/target/work/plugins/resources-1.2.7/grails-app/resourceMappers/org/grails/plugin/resource/BaseUrlResourceMapper.groovy",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/grails-app/conf/BootStrap.groovy",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/web-app/css/main.css",
+		"/home/mboucheron/Documents/travail/shableReborn/shablereborn/shablereborn/grails-app/i18n/messages.properties",
+		"/home/christo/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/christo/Data/perso/Dropbox/Info/projets/Script/code/Notes installations de tout les logiciels",
+		"/home/christo/Data/perso/Dropbox/Info/projets/Script/code/Etat Script CSC",
+		"/home/christo/Data/perso/Dropbox/Info/projets/Script/code/mysql_install.sh",
+		"/home/christo/.config/sublime-text-3/Packages/Terminal/Default (Linux).sublime-keymap",
+		"/home/christo/Data/perso/temporaire/untitled.java",
+		"/home/christo/Data/perso/Dropbox/Info/projets/Script/sftp-config.json",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/tomcat_install.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/sonar_install.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/entete.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/git_install.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/jdk_install.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/jenkins_install.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/maven_install.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/mysql_install.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/pre.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/script.conf",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/script_lanceur.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/script_install.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/code/ligne pour script git",
+		"/home/christo/Data/perso/Dropbox/Info/projets/ScriptCSC/Brouillon",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script_csc/temp/script_install.sh",
+		"/home/christo/echange/jenkins.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script_csc/temp/jenkins.sh",
+		"/home/christo/echange/script_git.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script_csc/temp/script_git.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script_csc/temp/script.conf",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script_csc/temp/sftp-config.json",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script_csc/maven/settings.xml",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script install/script_gitolite.sh",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script install/fait",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script install/script.conf",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script install/sftp-config.json",
+		"/home/christo/Data/perso/Dropbox/Info/projets/script install/sftp-config-alt.json",
+		"/home/christo/Documents/Journal Stage",
+		"/home/christo/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/christo/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/christo/.config/sublime-text-3/Packages/SFTP/SFTP.sublime-settings",
+		"/home/christo/.config/sublime-text-3/Packages/User/SFTP.sublime-settings",
+		"/home/christo/Téléchargements/Chef d'oeuvre",
+		"/home/christo/Data/perso/temporaire/Connection Raspberry en Ethernet direct",
+		"/home/christo/Bureau/test.sh",
+		"/home/christo/Bureau/Mail Antonia",
+		"/home/christo/Info/code/madafaka/grails-app/controllers/madafaka/HelloMamaController.groovy",
+		"/home/christo/.bashrc",
+		"/home/christo/Bureau/proxy.sh",
+		"/home/christo/Info/code/test-grails/test/grails-app/controllers/test/HelloController.groovy",
+		"/home/christo/Bureau/Le Capitole"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"/home/mboucheron/Documents/travail/ShableLeRetour/",
+			"/home/mboucheron/Documents/Kazaden/kazaden_site_repo/KazadenSite/web-app/less/"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"result_tables",
+			"result_students",
+			"\\r",
+			"font",
+			"Go",
+			" ",
+			"\\t"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"salle",
+			"arrayListEleves",
+			"leadSchool"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/modele/Classe.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 252,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/Java/Java.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/modele/Createur.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3589,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "UTF-8",
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/modele/Eleve.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 527,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/modele/Ordre.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 451,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "UTF-8",
+							"syntax": "Packages/Java/Java.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/modele/Salle.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 939,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								591,
+								591
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 432.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "WebContent/WEB-INF/private/dashboard.jsp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7170,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6060,
+								6060
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "UTF-8",
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2592.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/modele/Table.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1993,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "UTF-8",
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 7,
+					"file": "src/controller/Dashboard.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3682,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								899,
+								899
+							]
+						],
+						"settings":
+						{
+							"clone_numbers": 0,
+							"history_list_is_closing": true,
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 432.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 100.0
+	},
+	"project": "project.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"dashboard",
+				"WebContent/WEB-INF/private/dashboard.jsp"
+			],
+			[
+				"home",
+				"shablereborn/grails-app/views/home/index.gsp"
+			],
+			[
+				"appl",
+				"shablereborn/grails-app/conf/ApplicationResources.groovy"
+			],
+			[
+				"build",
+				"shablereborn/grails-app/conf/BuildConfig.groovy"
+			],
+			[
+				"main",
+				"shablereborn/grails-app/views/layouts/main.gsp"
+			],
+			[
+				"scrip",
+				"temp/script_install.sh"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/Documents/Kazaden/kazaden.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
