@@ -41,6 +41,8 @@ public class Salle {
             synchronized (declencheur) {
                 declencheur.notifyAll();
                 declencheur.notifyAll();
+                declencheur.notifyAll();
+                declencheur.notifyAll();
             }
 	}
 	
@@ -181,22 +183,20 @@ public class Salle {
 		double res = 0;
 		Hashtable<Integer, Double> coeff = coefficientTriche(a);
 		Enumeration<Integer> e = coeff.keys();
-		double i;
-		while (e.hasMoreElements()) {
-			i = e.nextElement();
-			res+= coeff.get(i);
-		}
+		while (e.hasMoreElements())
+			res+= coeff.get(e.nextElement());
 		return res;
 	}
 	
 	public Salle recuit(Salle salle, Class classe, ArrayList<Integer> TO, ArrayList<Integer> TL){
-		double temperature = 100;
-		int t_min = 75;
-		int rand_libre;
-		int compteur = 1;
-		double rand_rs = Math.random();
-		Table t = salle.tables.get(TO.get(0));
-		Salle s_temp = salle;
+		double temperature = 100;				// Paramètre classique du RC
+		double t_min = 75;							// Condition d'arrêt
+		double rand_libre;							// Permet de selectionner avec une probabilité plus élevé une table qui a un fort coefficient de triche.
+		int compteur = 1;						// Participe au calcul de la proba ci dessus
+		double rand_rs;			// Permet de selectionner avec une probabilité une solution dont l'énergie est plus élevée que l'actuel.
+//		Table t = salle.tables.get(TO.get(0));	
+//		Salle s_temp = salle;
+		
 		double e0 = calculerEnergie(TO);
 		double e_temp = e0;
 		double e_temp_1 = e0;
@@ -214,21 +214,26 @@ public class Salle {
 		}
 		
 		while(temperature < t_min){
-		rand_rs = Math.random();
-		TO = salle.triTables(salle.coefficientTriche(TO));
-		TO_temp = TO;
+		// Selection d'une table de TO au hasard parmi les 20% les plus chères
+		rand_rs = Math.random(); // rand_rs in [0,1)
+		
+		// On travaille sur des copies de TO et TL
+		TO_temp = salle.triTables(salle.coefficientTriche(TO)); // tri de TO
 		TL_temp = TL;
 		
+		// reset de l'itérateur sur la sélection de TO
 		compteur = 0;
 		
-		while ((tab_proba[compteur] > rand_rs)&& (tab_proba[compteur +1] < rand_rs)&& (compteur < tab_proba.length)) {
+		// on cherche la valeur d'index de TO_temp correspondant à rand_rs
+		while ((tab_proba[compteur] > rand_rs)&& (tab_proba[compteur +1] < rand_rs)&& (compteur < tab_proba.length-1)) {
 			compteur++;
 		}
 		
-		rand_libre = (int) Math.random()*(TL.size());
+		rand_libre = (int) Math.random()*(TL.size()+1); // rand_libre in [0;TL.size()+1[
 		
-		TO_temp.add(TL.get(rand_libre));
-		TL_temp.remove(rand_libre);
+		TO_temp.remove(compteur); // on enlève la table sélectionnée dans TO
+		TO_temp.add(TL.get((int)rand_libre)); // on rajoute la table sélectionnée dans TL
+		TL_temp.remove((int)rand_libre);
 		
 		e_temp_1 = calculerEnergie(TO);
 		
