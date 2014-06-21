@@ -3,6 +3,7 @@ package modele ;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable ;
+import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 import controller.Declencheur;
@@ -109,6 +110,146 @@ public class Salle {
 		while(e.hasMoreElements()){
 			this.tables.get(e.nextElement()).setSemaphore(sem);
 		}
+	}
+	
+	/**
+	 * Renvoi une hashtable <IdTable, coefficientTriche>
+	 * @param  a Va contenir la liste des tables en entrées;
+	 * @return   resultat.
+	 */
+	public Hashtable<Integer, Double> coefficientTriche(ArrayList<Integer> a){
+		Hashtable<Integer, Double> res = new Hashtable<Integer, Double>();
+		for(int j = 0 ; j < a.size(); j++){
+			res.put(a.get(j), this.tables.get(a.get(j)).getMoyennedistanceAuxTablesOccupees());
+		}
+		return res;
+	}
+
+	/**
+	 * Renvoi une ArrayList d'Id de tables triée par Coefficient de triche décroissant.
+	 * @param  Hashtable<Integer, Double> h [description]
+	 * @return                     			[description]
+	 */
+	public ArrayList<Integer> triTables(Hashtable<Integer, Double> h){
+		int size = h.size() ;
+		Enumeration<Integer> e ;
+		double maxCoefficient ;
+		int maxId, i,k ;
+		ArrayList<Integer> res = new ArrayList<Integer>() ;
+		
+		// On parcoure la Hashtable autant de fois qu'il y a d'éléments dedans.
+		for(int j = 0 ; j < size ; j++){
+			e = h.keys();
+			i = e.nextElement();
+			k=i;
+			maxId = i ;
+			maxCoefficient = h.get(i);
+			// Ici on trouve le maximum de la Hashtable.
+			while(e.hasMoreElements()){
+				i = e.nextElement();
+				if((maxCoefficient < h.get(i))&&(h.get(i)!=null)){
+					k=i;
+					maxCoefficient = h.get(i);
+					maxId = i ;
+					
+				}
+			}
+			res.add(maxId);
+			h.remove(k);
+		}
+		return res ;
+	}
+	
+	public void afficher(ArrayList<Integer> a){
+		System.out.println("Affichage des tables triés : \n");
+		for (int i = 0; i < a.size(); i++) {
+			System.out.println(a.get(i) + " : "+this.tables.get(a.get(i)).getMoyennedistanceAuxTablesOccupees());
+		}
+	}
+	
+	public void afficher(Hashtable<Integer, Double> h){
+		Enumeration<Integer> e = h.keys();
+		int i ;
+		System.out.println("Affichage du tableau des coefficients\n");
+		while(e.hasMoreElements()){
+			i = e.nextElement();
+			System.out.println(i+" : "+h.get(i));
+		}
+	}
+	
+	public double calculerEnergie(ArrayList<Integer> a){
+		double res = 0;
+		Hashtable<Integer, Double> coeff = coefficientTriche(a);
+		Enumeration<Integer> e = coeff.keys();
+		double i;
+		while (e.hasMoreElements()) {
+			i = e.nextElement();
+			res+= coeff.get(i);
+		}
+		return res;
+	}
+	
+	public Salle recuit(Salle salle, Class classe, ArrayList<Integer> TO, ArrayList<Integer> TL){
+		double temperature = 100;
+		int t_min = 75;
+		int rand_libre;
+		int compteur = 1;
+		double rand_rs = Math.random();
+		Table t = salle.tables.get(TO.get(0));
+		Salle s_temp = salle;
+		double e0 = calculerEnergie(TO);
+		double e_temp = e0;
+		double e_temp_1 = e0;
+		ArrayList<Integer> TO_temp, TL_temp;
+		
+		
+		double tab_proba[] = new double[(int)0.2*TO.size()];
+		
+		
+		tab_proba[0] = 0.5;
+		
+		while (compteur< tab_proba.length) {
+			tab_proba[compteur] = tab_proba[compteur - 1 ]/2;
+			compteur++;
+		}
+		
+		while(temperature < t_min){
+		rand_rs = Math.random();
+		TO = salle.triTables(salle.coefficientTriche(TO));
+		TO_temp = TO;
+		TL_temp = TL;
+		
+		compteur = 0;
+		
+		while ((tab_proba[compteur] > rand_rs)&& (tab_proba[compteur +1] < rand_rs)&& (compteur < tab_proba.length)) {
+			compteur++;
+		}
+		
+		rand_libre = (int) Math.random()*(TL.size());
+		
+		TO_temp.add(TL.get(rand_libre));
+		TL_temp.remove(rand_libre);
+		
+		e_temp_1 = calculerEnergie(TO);
+		
+		if (e_temp_1 < e_temp) {
+			TO = TO_temp;
+			TL = TL_temp;
+		}
+		else{
+			rand_rs = Math.random();
+			if (rand_rs < Math.exp(-(e_temp_1 - e_temp)/temperature)) {
+				TO = TO_temp;
+				TL = TL_temp;
+				temperature *= 0.9;
+			}
+		}
+		
+		}
+		
+		// TODO: set TO and TL as the new occupied and unoccupied table for salle
+		
+		return salle;
 	}
 	
 }

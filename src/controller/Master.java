@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.concurrent.Semaphore;
+import java.util.Hashtable;
 
 import modele.Classe;
 import modele.Createur;
@@ -97,14 +98,27 @@ public class Master {
 		/*
 		 * On affiche ensuite le résultat.
 		 */
-		salle.declencher(Ordre.affichage);
-		
 		// On commence la PHASE DE RECUIT SIMULÉ
-		/* Toutes les tables occupées calule ensuite leur coefficient de triche.
-		 * Je retransmet l'info de la même manière.*/
+		//double energie ;
+		Hashtable<Integer, Double> tableauCoefficientTriche ;
+		ArrayList<Integer> tableauCoefficientTricheTrie ;
 		
-		salle.envoyerInformation(TO);					// Encore une fois j'envoi à toutes les tables les coordonnées des tables occupées.
-		salle.declencher(Ordre.calcul_coeff_triche); 	
+		
+		
+		
+		salle.envoyerInformation(TO);								// Encore une fois j'envoi à toutes les tables les coordonnées des tables occupées.
+		salle.declencher(Ordre.calcul_coeff_triche); 				// Les tables calculent leur coefficient de triche.
+		tableauCoefficientTriche = salle.coefficientTriche(TO) ;	// Ici j'ai une ArrayList <IdTable, CoefficientTriche>
+		salle.afficher(tableauCoefficientTriche);
+		tableauCoefficientTricheTrie = salle.triTables(tableauCoefficientTriche);
+		salle.afficher(tableauCoefficientTricheTrie);
+		
+		
+		// DEBUT DU RECUIT SIMULE
+		
+		
+		
 		
 	}
+	
 }
