@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.concurrent.Semaphore;
+
 import modele.Classe;
 import modele.Createur;
 import modele.Eleve;
@@ -17,14 +19,18 @@ public class Master {
 		Salle salle = Createur.creationSalle();
 		Classe classe = Createur.creationClasse();
 		salle.startTables();	// On démarre les threads associés à nos tables.
-
 		
-		Enumeration<String> g = classe.getEleves().keys();
-		String l = "" ;
-		while(g.hasMoreElements()){
-			l = classe.getEleves().get(g.nextElement()).getNom();
-			System.out.println(l+"\n");
-		}
+		int nbTables = salle.getTables().size();
+		Semaphore sem = new Semaphore(nbTables);
+		salle.setSemaphore(sem);
+		
+		
+//		Enumeration<String> g = classe.getEleves().keys();
+//		String l = "" ;
+//		while(g.hasMoreElements()){
+//			l = classe.getEleves().get(g.nextElement()).getNom();
+//			System.out.println(l+"\n");
+//		}
 		
 		
 		
@@ -60,10 +66,27 @@ public class Master {
 			// On envoi à toutes les tables la liste des tables occupées.
 			salle.envoyerInformation(TO);
 			// On dit aux tables libres de commencer à calculer leur distance aux autres tables qui sont occupées.
-			salle.setTacheTerminee(false);
+			//salle.setTacheTerminee(false);
+			try {
+				sem.acquire(nbTables);
+				//System.out.println("Je suis master et je viens de prendre "+nbTables+" tokens.\n");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			salle.declencher(Ordre.calcul_distance_aux_tables_occupees);
+			try {
+				//sem.acquire(nbTables);
+				for (int j = 0; j < nbTables; j++) {
+					sem.acquire();
+					//System.out.println("Acquisition de "+(j+1)+" token\n");
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			sem.release(nbTables);
+			
 			//On attends que toutes les tables ait terminéee leur tache.
-			while(!salle.getTacheTerminee()){}
+			//while(!salle.getTacheTerminee()){}
 			/*
 			 * Chacune des tables fait ensuite la moyenne de ses distances aux tables occupées.
 			 * On parcoure ensuite toutes ces moyennes, et on renvoi l'id de la table qui a la moyenne la plus élevée.
