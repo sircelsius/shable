@@ -80,29 +80,22 @@ public class Dashboard extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String result_salle = "TOTO";
-		result_salle = request.getParameter("salle");
-		String result_class = request.getParameter("classe");
-
-		System.out.println("La salle est:" + result_salle);
-		System.out.println("La classe est:" + result_class);
-		
-		ArrayList<String> result_tables = new ArrayList<String>();
-		ArrayList<String> result_students = new ArrayList<String>();
-		
-		result_tables.add("1");
-		result_students.add("Christophe Guillonnet");
+		// Inscrit en dur, ne fonctionne pas.
 		list_salle.add(salle1);
 		list_salle.add(salle2);
-		
 		list_classe.add(classe1);
 		list_classe.add(classe2);
 		list_classe.add(classe3);
 		
-		request.setAttribute("result_tables", result_tables);
-		request.setAttribute("result_students", result_students);
-		request.setAttribute("result_salle", result_salle);
-		request.setAttribute("result_class", result_class);
+		String log = (String)request.getParameter("log");
+		System.out.println("Log : "+log);
+		Boolean logBool = log.equals("on") ? true : false ;
+		
+		
+		
+		
+		Hashtable<Integer, String> h = Master.shable(logBool, 75); 
+		
 		//request.setAttribute("testEl", marc);
 		request.setAttribute("list_salle", (ArrayList<String>)list_salle);
 		request.setAttribute("list_classe", (ArrayList<String>)list_classe);
