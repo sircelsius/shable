@@ -24,7 +24,7 @@ public class Master {
 		Classe classe = Createur.creationClasse();
 		salle.startTables();	// On démarre les threads associés à nos tables.
 		
-		/* On cré un objet Sémaphore qui va contenir nbTables tokens.
+		/* On créé un objet Sémaphore qui va contenir nbTables tokens.
 		 * 		- lorsqu'une table est déclenché, elle exécute son ordre, puis relache un token ;
 		 * 		- lorsque Master recoit nbTables tokens, on sait que toutes les tables ont finis leur tache.  
 		 */
@@ -82,7 +82,7 @@ public class Master {
 			 * Cet Id correpsond à la table la plus isolée.
 			 */
 			int idTableIsolee = salle.getTableIsolee();
-			System.out.println("Iteration "+(i+1)+" La table la plus isolée est "+idTableIsolee);
+			if (logactive) System.out.println("Iteration "+(i+1)+" La table la plus isolée est "+idTableIsolee);
 			// On ajoute/retire ensuite cette table à la liste des tables occupées (TO)/tables libres (TL).
 			TO.add((Integer)idTableIsolee);
 			TL.remove((Integer)idTableIsolee);
@@ -91,7 +91,7 @@ public class Master {
 		}
 		
 		
-		System.out.println("PHASE D'INITIALISATION TERMINÉE.");
+		if(logactive) {System.out.println("PHASE D'INITIALISATION TERMINÉE.");}
 		/*
 		 * On affiche ensuite le résultat.
 		 */

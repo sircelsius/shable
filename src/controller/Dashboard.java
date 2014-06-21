@@ -37,11 +37,11 @@ public class Dashboard extends HttpServlet {
 	 * defined below */
 	
 	private String salle1 = "TG-201";
-	private String salle2 = "CT-401";
+	//private String salle2 = "CT-401";
 	
 	private String classe1 = "ING2-GIC1";
-	private String classe2 = "ING2-GIC2";
-	private String classe3 = "ING2-GIC3";
+	//private String classe2 = "ING2-GIC2";
+	//private String classe3 = "ING2-GIC3";
 	
 	
 
@@ -62,11 +62,11 @@ public class Dashboard extends HttpServlet {
 		request.setAttribute("username", userName);*/
 		
 		list_salle.add(salle1);
-		list_salle.add(salle2);
+		//list_salle.add(salle2);
 		
 		list_classe.add(classe1);
-		list_classe.add(classe2);
-		list_classe.add(classe3);
+		//list_classe.add(classe2);
+		//list_classe.add(classe3);
 		
 		//request.setAttribute("testEl", marc);
 		request.setAttribute("list_salle", (ArrayList<String>)list_salle);
@@ -82,19 +82,24 @@ public class Dashboard extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Inscrit en dur, ne fonctionne pas.
 		list_salle.add(salle1);
-		list_salle.add(salle2);
+		//list_salle.add(salle2);
 		list_classe.add(classe1);
-		list_classe.add(classe2);
-		list_classe.add(classe3);
+		//list_classe.add(classe2);
+		//list_classe.add(classe3);
+		String result_classe = request.getParameter("classe");
+		//String t_min = request.getParameter("t_min");
+		String logString =request.getParameter("log");
+		System.out.println("Log : "+logString);
+		boolean logBool = false;
+		if(logString.equals("on")){
+			logBool = true;
+		}
+		System.out.println("logBool : " + logBool);
 		
-		String log = (String)request.getParameter("log");
-		System.out.println("Log : "+log);
-		Boolean logBool = log.equals("on") ? true : false ;
 		
 		
 		
-		
-		Hashtable<Integer, String> h = Master.shable(logBool, 75); 
+		Hashtable<Integer, String> h = Master.shable(logBool,75); 
 		
 		//request.setAttribute("testEl", marc);
 		request.setAttribute("list_salle", (ArrayList<String>)list_salle);

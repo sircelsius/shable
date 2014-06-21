@@ -77,8 +77,7 @@
             <div class="large-6 small-12 columns">
               <label for="salle">Salle</label>
               <select name="salle" id="salle_select">
-              <label for="log">Voulez-vous voir les logs ?</label>
-              <input type="checkbox" name="log" />
+              
                 <% ArrayList<String> list_salle = new ArrayList<String>();
                 String salle = new String();
 
@@ -98,7 +97,7 @@
                 <% ArrayList<String> list_classe = new ArrayList<String>();
                 String classe = new String();
 
-                //list_classe = (ArrayList<String>)request.getAttribute("list_classe");
+                list_classe = (ArrayList<String>)request.getAttribute("list_classe");
 
                 for(int i=0; i< list_classe.size(); i++){
                   classe = list_classe.get(i);
@@ -108,6 +107,9 @@
                  %>
               </select>
             </div>
+            <label for="log">Voulez-vous voir les logs ?</label>
+              <input type="radio" name="log" value="on" />
+              <input type="radio" name="log" value="off" />
           </div>
           <input type="submit" class="button" value="Placer les élèves">
         </form>
