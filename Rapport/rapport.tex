@@ -130,14 +130,294 @@ Bernard \textsc{Glonneau} % Supervisor's Name
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 
+Dans le cadre du semestre 4 (ING2) de nos études à l'EISTI, nous avions pour projet de réaliser une application permettant de placer des élèves de façon optimale dans une salle d'examen.
+
+L'énoncé du devoir expose notamment les contraintes suivantes:
+
+\begin{itemize}
+\item pouvoir placer \texttt{n} élèves dans une salle contenant \texttt{p} tables indépendamment de \texttt{n} et \texttt{p};
+\item être capable de \textit{quantifier le risque de triche} entre élèves;
+\item mettre à profit les compétences acquises dans le module de programmation et d'algorithmique parallèle.
+\end{itemize}
+
+Afin de répondre à ce problème, il nous a donc été nécessaire de réunir nos connaissances en développement, mais aussi en algorithmique. En effet, si ce problème peut sembler simple au premier abord, il est en réalité assez complexe.
+
+\section*{Complexité du problème}
+\addcontentsline{toc}{section}{Complexité du problème}
+
+Dans cette partie introductive, nous retranscrirons notre analyse initiale du problème avant d'analyser les conséquences algorithmiques qui ont découlé.
+
+Considérons le cas trivial suivant: comment placer 4 élèves dans une salle rectangulaire avec \texttt{p} tables réparties equitablement?
+
+Cette question est totalement triviale. de même, on peut aisément augmenter le nombre d'élèves légèrement et arriver à des solutions élégantes.
+
+Cependant, le problème devient rapidement beaucoup plus complexe lorsque l'on change la géométrie de la salle ou que l'on augmente grandement le nombre d'élèves (essayer de placer 20 élèves dans une salle polygonale avec des tables réparties aléatoirement est loin d'être trivial!)
+
+\section*{Recherche d'un algorithme}
+\addcontentsline{toc}{section}{Recherche d'un algorithme}
+
+Avant de chercher un algorithme, il est nécessaire de modéliser le problème.
+Voici nos hypothèses : 
+\begin{itemize}
+\item quantification de la triche entre élèves : pour quantifier le risque de triche entre élèves, nous nous sommes basés sur la proximité entre élèves. Un groupe d'élèves rapprochés dans une salle aura plus de facilité à tricher que des élèves épars.
+Notre critère est donc le suivant : pour un élève donnée, son risque de triche est directement corrélé à la moyenne de ses distances aux autres élèves.
+Pour simplifier nos propos dans cette partie, nous appellerons cette moyenne M.
+\item objectif à atteindre : le but est donc ici de maximiser pour chaque élèves sa valeur de \texttt{M}.
+\item Globalement, nous voulons maximiser la valeur de \texttt{M} pour toute la classe.
+\end{itemize}
+
+Nous avons fait quelques recherches afin trouver un problème connu proche du notre.
+Toutefois, ce problème n'est pas un problème très connu. Des formes particulières du problème du voyageur de commerce se rapprochent de ce problème, mais nous n'avons pas réussi à exploiter celles-ci ; les connaissances mathématiques associées étaient hors de notre portée, et le développement de ces solutions aurait été très difficile.
+
+Par ailleurs, ce problème est un problème \texttt{NP}-complet, sa solution ne peut donc pas être trouvé en un temps raisonnable.
+
+Nous nous sommes donc tournés sur un algorithme que nous connaissons mieux, et qui donne des résultats honnêtes : l'algorithme du Recuit Simulé.
+
 
 \chapter{Algorithme}
+
+Notre algorithme est un recuit simulé dont l'énergie est la somme des moyennes des distances entre les tables occupées.
+
+Le recuit simulé nécessitant une phase d'initialisation, nous avons commencé par obtenir une solution initiale la moins mauvaise possible.
+
+Ce chapitre détaille le déroulement de l'algorithme utilisé en pseudo code.
+
+\section{Initialisation}
+\label{init}
+
+En partant d'une salle et d'une classe, on place les élèves un par un le plus loin (en moyenne) de ceux placés auparavant.
+
+Exemple : dans le cadre d'une salle carré, et en placant notre premier élève dans le coin supérieur gauche, notre algorithme d'initialisation donnera la table du coin inférieur droit comme prochain emplacement.
+Le suivant sera soit le coin supérieur droit, soit le coin supérieur gauche.
+(Nous déterminons en fait l'emplacement qui maximise \texttt{M})
+
+\section{Choix de conception}
+
+Comme nous l'avons vu précedement, nous nous intéressons plus à l'emplacement des élèves qu'aux élèves eux même. Notre modèle n'est donc pas \textit{très} proche de la réalité.
+
+En résumé, voici la composition de notre programme :
+\begin{itemize}
+\item une classe \texttt{Master}, qui applique notre algorithme de Recuit Simulé;
+\item une classe \texttt{Eleve}, qui symbolise simplement un élève;
+\item une classe \texttt{Classe}, qui contient simplement une collection d'objets \texttt{Eleve};
+\item une classe \texttt{Table}, second coeur de notre programme;
+\item enfin, une classe \texttt{Salle}, qui a principalement pour d'effectuer des actions sur sa propre collection de table;
+\item enfin, une classe \texttt{Createur}, qui délocalise la création de notre classe et et de notre \texttt{Salle}.
+\end{itemize}
+
+\subsection{Classe \texttt{Master}}
+La classe \texttt{Master} est simplement notre \texttt{main()}. C'est elle qui instancie nos \texttt{Eleve} et forme ensuite une \texttt{Classe}, puis instancie nos \texttt{Table} et forme ensuite une \texttt{Salle}.
+Cela effectué, c'est la classe \texttt{Master} qui via la classe \texttt{Classe}, implémente l'algorithme de Recuit Simulé.
+
+\subsection{Classe \texttt{Table}}
+C'est ici que réside les difficultés que nous avons rencontrées. Etant donné que nous nous intéressons aux \texttt{emplacements} de nos élèves, c'est donc la classe \texttt{Table} que nous avons le plus développé.
+
+Nous précedement établit que nous choisisons un futur emplacement pour un élève en fonction de sa distance aux autres élèves.
+Cela se traduit par : "nous choisissons parmis les tables libres celle dont les distances aux tables occupées sont les plus grandes". En utilisant notre notation \texttt{M}, cela signifie que nous choisissons parmis les tables libres celles qui présentent un \texttt{M} le plus élevé.
+
+Pour calculer ce \texttt{M} pour chaque table de nombreuses reprises dans notre algorithme, nous avons décidé de mettre en pratique le multi-threading.
+Notre classe \texttt{Table} implémente donc l'interface \texttt{Runnable}. Chaque table est donc sensée calculer elle-même sa valeur de \texttt{M}, parmis d'autres opérations. Pour cela, il est nécessaire que l'execution de ces méthodes provienne de la méthode \texttt{run()} de la table. 
+
+Il est illégal de lancer plusieurs fois la méthode \texttt{start()} sur un Thread, il est donc nécessaire de trouver un moyen de conserver la méthode \texttt{run()} vivante, et que celle-ci puisse effectuer des actions différentes. Voici nos solutions : 
+\begin{itemize}
+\item utilisation d'une énumération \texttt{Ordre} : il s'agit de la liste d'ordre que peut exécuter une table;
+\item utilisation des méthodes \texttt{wait()} et \texttt{notify()} : l'appel de la méthode \texttt{wait()} sur un objet "Declencheur" (attribut commun à toutes nos tables), permet d'endormir nos \texttt{Tables}(Threads) à la fin de l'execution d'un ordre. C'est notre solution de mise en veille de nos threads. Lorsque \texttt{Master} (via Salle) appelle la méthode \texttt{notifyAll()} sur ce même objet, nos\texttt{ Tables} se réveillent et executent l'ordre présent dans leur énumération.
+\item utilisation d'une sémaphore : dans notre classe \texttt{Master}, le lancement d'opérations dans nos threads nous rends la main immédiatement. \texttt{Master} execute donc des instructions dépendantes de résultats que nos tables n'ont pas fini de calculer. Pour pallier à ce problème, Master essaye d'acquérir \texttt{n} jetons sur un objet \texttt{Sémaphore}, jetons qui sont relachés par nos \texttt{n} tables quand elles ont finis leurs calculs uniquement.
+Cette sémaphore agit donc comme un élément bloquant l'execution du thread principal \texttt{Master} tant que nos calculs répartis dans nos tables ne sont pas terminés.
+\end{itemize}
+
+Concernant la communication de l'information entre nos tables, nous avons premièrement pensé inclure un attribut \texttt{Classe} dans nos \texttt{Table}, permettant ainsi à toutes tables de pouvoir acceder aux informations des voisines (la table voisine est-elle occupée ou non ? Quelles sont ses coordonnées ?). Toutefois cette solution présentait le problème d'un accès concurrent à notre instance de \texttt{Classe} et ses attributs (des tables qui se posent des questions).
+
+Nous aurions aussi pu transmettre uniquement les informations utiles (comme TO, TL, tx, ty) à nos \texttt{Table}, et réutiliser le mécanisme de Mutex dessus.
+Nous avons préféré faire une copie par valeur (et non par références) de ces informations dans des attributs de la table, ainsi chaque table à ses informations et peut travailler tranquillement.
+
+\begin{verbatim}
+    PROCEDURE initialiser(Classe classe, Salle salle)
+        Eleve e1 = classe(1)
+        Table t1 = salle(1)
+        
+        // Mettre le premier eleve sur la premiere table
+        t1.ajouterEleve(e1)
+        
+        POUR eleve DANS classe FAIRE
+        	// trouver la table libre la plus lointaine
+        	// des tables occupees (en moyenne).
+        	Table t = salle.tablesLibres.calculerTableMin
+        
+        	// ajouter l'eleve courant à la table trouvee
+        	t.ajouterEleve(eleve)
+        FIN POUR    
+        Energie e0 = salle.calculerEnergie
+        
+        RETOURNER e0
+    FIN PROCEDURE
+\end{verbatim}
+
+\section{Recuit Simulé}
+\label{recuit}
+
+Une fois la solution initiale obtenue, on lui applique un algorithme de recuit simulé.
+
+\begin{verbatim}
+    PROCEDURE optimiser(Salle salle, Classe classe)
+    // declaration des variables
+    Entier t = 100
+    Entier t_min = 75 // minimum a ajuster empiriquement
+    Entier compteur= 1
+    Float rand_rs = RANDOM%1
+    Entier rand_libre = (Entier) RANDOM
+    Table t = salle.tables_occupees(0)
+    salle s_temp = salle
+    Energie e0 = initialiser(salle, classe)
+    Energie e_temp = e0
+    Energie e_temp_1 = e0
+    
+    // contient les probabilites de choisir une table parmi
+    // les 20% d'energie individuelle max
+    Tableau de Entier tab_proba = 
+             Tableau de Entier[0.2*salle.tables_occupees.taille]
+    
+    tab_proba[0] = 0.5 // probabilité de 0.5 de bouger la table
+                       // dont l'energie est maximale
+    
+    
+    TANT QUE compteur<tab_proba.taille FAIRE
+        tab_proba[compteur] = tab_proba[compteur-1]/2
+        compteur += 1
+    FIN TANT QUE
+    
+    TANT QUE t>t_min FAIRE
+        rand = RANDOM%1
+        salle.tables_occupees.ordonnerParEnergie
+        compteur = 0
+        
+        // selectionner la table correspondant la proba
+        // calculee
+        TANT QUE tab_proba[compteur] < rand FAIRE
+            compteur += 1
+        FIN TANT QUE
+        
+        // changer l'eleve selectionne de place
+        rand_libre = RANDOM%salle.tables_libres.taille
+        
+        s_temp.tables_libres(rand_libre).mettreEleve(
+                        salle.tables_occupees(compteur))
+                        
+        s_temp.tables_occupees.enleverEleve(
+                        salle.tables_occupees(compteur))
+        
+        e_temp_1 = s_temp.calculerEnergie
+        
+        SI e_temp_1 < e_temp FAIRE
+            salle = s_temp
+        SINON FAIRE
+            rand = RANDOM%1
+            SI rand > expt( - (e_temp_1 - e_temp)/ t ) ALORS
+                e_temp = e_temp_1
+                salle = s_temp
+                t = 0.95*t
+            FIN SI
+        FIN SI
+    FIN TANT QUE
+    
+    RETOURNER salle
+    
+FIN PROCEDURE
+            
+        
+        
+        
+    
+\end{verbatim}
 
 
 \chapter{Code}
 
+\section{Technologies utilisées}
+
+Nous avons utilisé pour la mise en pratique de l'algorithme \texttt{Java 1.7}, notamment les méthodes de programmation parallèle telles que l'interface \texttt{Runnable}.
+
+Ce code est integré dans un projet \texttt{Java EE} tournant sur \texttt{tomcat} et utilisant le framework front-end \texttt{Foundation 5}.
+L'affichage de nos tables n'est pas graphique, mais dans un tableau HTML.
+Concernant la base de données d'élèves et de salle, celle-ci est inscrite en dure dans notre programme, par manque de temps. Nous avions envisagés l'utilisation de SQLLite, qui n'est pas très difficile d'accès, mais là aussi n'avons pas eu le temps de l'implémenter, due à une mauvaise gestion de notre temps.
+
+\section{Exemples de difficultés rencontrées}
+
+\subsection{Réveil des threads \texttt{Table}}
+
+Lorsque les objets \texttt{Table} (qui implémentent \texttt{Runnable}) sont réveillés afin d'obtenir la solution initiale, il intervient une \textit{race condition} entre le thread principal et ses fils.
+
+En effet, chaque thread \texttt{Table} effectue des calculs .
+
+Dans la première version de \textit{Shable}, nous n'avions pas géré ce problème et nous nous sommes retrouvés dans la situation suivante: lors de la phase d'initialisation (\textit{cf.} \ref{init}), l'ensemble des threads fils obtenait lors de son réveil l'état de la salle et commençait ses calculs, mais le thread père continuait sa route et lançait l'itération suivante sans attendre les résultats. Par conséquent nous nous retrouvions avec une solution de départ (en fonction du temps d'éxecution de chaque thread) qui mettait $50\%$ des élèves dans un coin de la salle et le reste dans l'autre.
+
+Nous avons résolu ce problème en ajoutant à la classe \texttt{Master} un attribut de type \texttt{Semaphore} qui a comme nombre de \textit{token} exactement le nombre de \texttt{Table} dans la salle. Avant de réveiller les threads, la classe \texttt{Master} réserve l'ensemble de ces \textit{token} qui sont ensuite libérés un par un par ses fils. \texttt{Master} doit alors attendre que l'ensemble des \textit{token} soit libre (via une nouvelle réservation) avant de continuer.
+
+Ainsi, la classe \texttt{Master} attend effectivement la fin de l'ensemble des calculs des différentes tables avant de sélectionner la suivante lors de l'initialisation.
+
+\subsection{L'étrange bug du double \texttt{notifyAll}}
+
+Lors de l'appel de la fonction \texttt{declencher} de la classe \texttt{Table}, les threads correspondants sont réveillés par un appel de la fonction \texttt{notifyAll}.
+
+Au moment du développement, nous avons passé \textit{beaucoup} de temps \footnote{6h, entre 22h et 4h un jour de semaine} à essayer de résoudre un bug étrange: l'appel de cette fonction pourtant simple réveillait les threads concernés, sauf le tout premier.
+
+A ce jour, nous ne connaissons toujours pas l'origine de ce comportement. Cependant nous avons fini par faire fonctionner la fonction en appelant deux fois de suite la fonction \texttt{notifyAll}.
+
+\chapter{Améliorations potentielles}
+
+\section{Algorithmiques}
+
+Nous pensons qu'il est possible d'améliorer notre algorithme en introduisant notamment les notions suivantes:
+
+\begin{itemize}
+\item proposer différentes méthodes de calcul de la solution initiale afin d'améliorer les performances du recuit. Ceci est notamment possible en différenciant les cas en fonction de différents critères (liste non exhaustive):
+\begin{itemize}
+\item taille de la classe;
+\item taille de la salle;
+\item symmétrie de la salle;
+\item rapport d'ordre de grandeur entre la taille de la salle et celle de la classe.
+\end{itemize}
+\item améliorer l'efficacité de la seconde partie de l'algorithme par l'utilisation de grandes quantités de résultats empiriques (la température initiale ainsi que sa fonction de décroissance sont des choix arbitraires qui peuvent influencer la qualité des résultats et le temps d'éxecution);
+\item considérer plus de tables occupées potentiellement modifiables. Dans la version actuelle, seules les $20\%$ ayant les moyennes de distance les plus hautes sont candidates au mouvement, les autres étant fixes. De plus celles-ci sont sélectionnées avec une probabilité décroissante ($50\%$, $25\%$, \dots);
+\item changer la méthode de sélection de la table vide sur laquelle l'élève sélectionné est placé. Cela permettrait notamment de considérer des voisins qui, si ils sont \textit{a priori} plus mauvais peuvent s'avérer judicieux plusieurs itérations après;
+\item déplacer plusieurs élèves à chaque itération. Cela permettrait (de même que la proposition précédente) de considérer un espace de solution plus important par conséquent de s'approcher de puits d'énergie qui peuvent être compliqués à atteindre avec l'algorithme actuel;
+\item \dots
+\end{itemize}
+
+\section{Technologiques}
+
+Dans le code, plusieurs améliorations de performance ou de modélisation nous semblent possible:
+
+\begin{itemize}
+\item optimiser l'utilisation de la programmation parallèle en incluant des calculs d'énergie décentralisés et/ou un accès en mémoire partagée lors du calcul de recuis (un thread représentant un voisin par exemple);
+\item conserver un historique des calculs (en incluant une base de données de résultats par exemple) et implémenter des algorithmes de \textit{machine learning} afin de prévoir à l'avance quelle variation de l'algorithme utiliser;
+\item \dots
+\end{itemize}
+
+\section{D'interface}
+
+Nous pensons qu'il est crucial d'avoir une interface optimisée pour permettre à un utilisateur de comprendre les possibilités de l'application ainsi que les résultats des calculs effectués.
+
+Pour cela, plusieurs solutions sont envisageables:
+
+\begin{itemize}
+\item afficher une représentation graphique de la solution. Nous avions consideré plusieurs options lors du développement de Shable, dont on peut d'ailleurs voir les restes dans les source (la bibliothèque \texttt{d3} dans \texttt{/WEB-INF/js}, le code \texttt{svg} commenté dans \texttt{/WEB-INF/private/dashboard.jsp}, \dots);
+\item mettre à jour en direct sur l'interface web la progression du calcul et l'amélioration du potentiel de triche;
+\item \dots
+\end{itemize}
+
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
+
+Ce projet nous a donnée beaucoup de fil à retordre, essentiellement du fait de notre manque d'organisation temporelle et de notre difficulté à définir clairement les spécifications fonctionnelles et techniques. Nous avons pris énormément de retard et avons ensuite été embarqués dans d'autres occupations (nos stages notamment) qui ne nous ont pas facilité la tâche. Sur le plan de la gestion de projet et du respect des délais il s'agit donc d'un echec.
+
+Nous retenons cependant certains points positifs sur différents plans. 
+
+Tout d'abord, nous réalisons à quel point il est impossible de se lancer tête baissée dans un projet techniquement compliqué et volontairement libre sur les technologies et algorithmes à utiliser. En tant que développeurs, nous avons ainsi beaucoup appris sur l'importance d'un cahier des charges bien défini, chose que nous retrouvons aujourd'hui dans nos différents stages.
+
+De plus, nous avons eu grâce à Shable l'occasion de mettre en pratique les différents cours vu en $2^{ème}$ année du cycle ingénieur: algorithmique et programmation parallèle, développement \texttt{Java EE}, Design Pattern, \dots
+
+Enfin, d'un point de vue personnel, nous avons découvert les difficultés nous poussent à vouloir faire les choses bien (nous sommes repartis de zéro à divers états d'avancement plus de cinq fois et utilisé trois langages différents avant de nous fixer sur \texttt{Java}) et à repenser en permanence l'architecture de notre projet. Bien qu'il s'agissent d'une sorte de variation sur le développement agile vu au semestre 3, nous avons compris que l'on revient presque naturellement à ces méthodes.
 
 
 \newpage

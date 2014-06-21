@@ -81,7 +81,9 @@ public class Salle {
 	 * 		- une ArrayList x contenant les abscisses des tables correspondantes ;
 	 * 		- une ArrayList x contenant les ordonnées des tables correspondantes ;
 	 * Ces informations sont evnoyées à TOUTES les tables.
+	 * @param TO la ArrayList contenant les id des tables actuellement occupées
 	 */
+	
 	public void envoyerInformation(ArrayList<Integer> TO){
 		// On crée nos 3 ArrayList que l'on va envoyer aux tables.
 		ArrayList<Integer> T = new ArrayList<Integer>() ;	// Va contenir les Ids des tables occupées.

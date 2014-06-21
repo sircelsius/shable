@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.22)  18 JUN 2014 19:14
+This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.22)  21 JUN 2014 10:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -722,7 +722,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 84.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<logoEISTI.jpg, id=20, 245.41687pt x 376.40625pt>
+<logoEISTI.jpg, id=80, 245.41687pt x 376.40625pt>
 File: logoEISTI.jpg Graphic file (type jpg)
  <use logoEISTI.jpg>
 Package pdftex.def Info: logoEISTI.jpg used on input line 101.
@@ -735,13 +735,23 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 {/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map} <./logoEISTI
 .jpg>]
-(./rapport.toc)
+(./rapport.toc
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 8.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+))
 \tf@toc=\write4
 \openout4 = `rapport.toc'.
 
- [2
+
+[2
 
 ]
+Overfull \hbox (2.55191pt too wide) in paragraph at lines 154--155
+[]\T1/cmr/m/n/10.95 Cependant, le prob-lème de-vient rapi-de-ment beau-coup plu
+s com-plexe lorsque l'on change la géométrie
+ []
+
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 13.59999pt.
@@ -752,6 +762,8 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 ]
 Chapitre 1.
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 208.
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 13.59999pt.
@@ -760,7 +772,11 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 [4
 
-]
+] [5]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6]
+[7]
 Chapitre 2.
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -768,52 +784,78 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[5
+[8
 
 ]
+Chapitre 3.
+
+Underfull \vbox (badness 6741) has occurred while \output is active []
+
+
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 13.59999pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[6
+[9
+
+] [10]
+
+LaTeX Warning: Command \` invalid in math mode on input line 418.
+
+Missing character: There is no è in font cmr8!
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 13.59999pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[11
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 155.
- [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 155.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 435.
+ [12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 435.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 155.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 155.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 435.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 435.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: 301C80AB2719E5017D42F96B25EC5997;178.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 155.
+(rerunfilecheck)             Checksum: D06A5D53B2D0C576B58ABDB018184054;1219.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 435.
  ) 
 Here is how much of TeX's memory you used:
- 8970 strings out of 495034
- 125104 string characters out of 6181677
- 227844 words of memory out of 5000000
- 12038 multiletter control sequences out of 15000+600000
- 17849 words of font info for 45 fonts, out of 8000000 for 9000
+ 9049 strings out of 495034
+ 126420 string characters out of 6181677
+ 233945 words of memory out of 5000000
+ 12085 multiletter control sequences out of 15000+600000
+ 23075 words of font info for 53 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,11n,43p,242b,470s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,12n,43p,649b,508s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/cm-super/sfbx2488.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/cm-super/sfcc1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/cm-super/sfcc1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-
-super/sfcc1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/s
-frm0800.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1095
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on rapport.pdf (7 pages, 159488 bytes).
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/cm-super/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/cm-super/sfbx1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/cm-super/sfbx2074.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-
+super/sfbx2488.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/s
+fcc1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfcc1440
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/cm-super/sfsl1095.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/cm-super/sfti1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/cm-super/sfti1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/c
+m-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super
+/sftt1200.pfb>
+Output written on rapport.pdf (12 pages, 349247 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
- 91 compressed objects within 1 object stream
- 13 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 249 PDF objects out of 1000 (max. 8388607)
+ 211 compressed objects within 3 object streams
+ 34 named destinations out of 1000 (max. 500000)
+ 158 words of extra memory for PDF output out of 10000 (max. 10000000)
 
