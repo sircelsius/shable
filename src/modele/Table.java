@@ -11,7 +11,6 @@ import static java.lang.Math.hypot;
 public class Table implements Runnable{
 	// Cet objet va être le déclencheur d'action de nos tables
 	private Declencheur declencheur ;
-	//private boolean tacheTerminee = false ;
 	private Semaphore sem ;
 	
 	// Coordonnées de la table
@@ -49,14 +48,6 @@ public class Table implements Runnable{
 	public int getId(){
 		return this.id;
 	}
-	
-//	public boolean getTacheTerminee(){
-//		return this.tacheTerminee ;
-//	}
-//	
-//	public void setTacheTerminee(boolean b){
-//		this.tacheTerminee = b ;
-//	}
 	
 	public void setSemaphore(Semaphore sem){
 		this.sem = sem ;
@@ -161,8 +152,6 @@ public class Table implements Runnable{
 					e.printStackTrace();
 				}
 			}
-			//System.out.println("Je suis "+this.id+" et je me réveille");
-			//System.out.println("Je me réveille"+this.id+"\n");
 			switch(this.ordre){
 				case affichage:
 					this.toString();
@@ -191,8 +180,6 @@ public class Table implements Runnable{
 					break;
 			}
 			this.sem.release();
-			//System.out.println("Je suis "+this.id+" et je viens de relacher un token.\n");
-			//System.out.println("Je me rendors "+this.id);
 		}
 	}
 

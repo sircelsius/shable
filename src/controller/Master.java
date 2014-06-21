@@ -20,18 +20,13 @@ public class Master {
 		Classe classe = Createur.creationClasse();
 		salle.startTables();	// On démarre les threads associés à nos tables.
 		
+		/* On cré un objet Sémaphore qui va contenir nbTables tokens.
+		 * 		- lorsqu'une table est déclenché, elle exécute son ordre, puis relache un token ;
+		 * 		- lorsque Master recoit nbTables tokens, on sait que toutes les tables ont finis leur tache.  
+		 */
 		int nbTables = salle.getTables().size();
 		Semaphore sem = new Semaphore(nbTables);
 		salle.setSemaphore(sem);
-		
-		
-//		Enumeration<String> g = classe.getEleves().keys();
-//		String l = "" ;
-//		while(g.hasMoreElements()){
-//			l = classe.getEleves().get(g.nextElement()).getNom();
-//			System.out.println(l+"\n");
-//		}
-		
 		
 		
 		/* *************************************
@@ -39,12 +34,11 @@ public class Master {
 		 * 		- PHASE D'INITIALISATION
 		 * 		- PHASE DE RECUIT SIMULÉ
 		 * ************************************/
-		
-		
+			
 		
 		// On commence la PHASE D'INITIALISATION
 		//ArrayList<Integer> TL = new ArrayList<Integer>(salle.getTables().keySet());	// TL est l'ArrayList des Tables Libres
-		ArrayList<Integer> TO = new ArrayList<Integer>() ;							// TO est l'ArrayList des Tables Occupées
+		ArrayList<Integer> TO = new ArrayList<Integer>() ;								// TO est l'ArrayList des Tables Occupées
 		/*On place le 1er élève à sa table, on set la table à occupé,
 		 *  on ajoute cette table à la liste des tables occupées,
 		 *  et je retire cette table de la liste des tables libres.*/
@@ -66,20 +60,14 @@ public class Master {
 			// On envoi à toutes les tables la liste des tables occupées.
 			salle.envoyerInformation(TO);
 			// On dit aux tables libres de commencer à calculer leur distance aux autres tables qui sont occupées.
-			//salle.setTacheTerminee(false);
 			try {
 				sem.acquire(nbTables);
-				//System.out.println("Je suis master et je viens de prendre "+nbTables+" tokens.\n");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			salle.declencher(Ordre.calcul_distance_aux_tables_occupees);
 			try {
-				//sem.acquire(nbTables);
-				for (int j = 0; j < nbTables; j++) {
-					sem.acquire();
-					//System.out.println("Acquisition de "+(j+1)+" token\n");
-				}
+				sem.acquire(nbTables);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

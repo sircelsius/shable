@@ -104,33 +104,6 @@ public class Salle {
 		}
 	}
 	
-//	/**
-//	 * Permet de setter la valeur de l'attribut "tacheTerminee" pour toutes les tables de la salle.
-//	 * @param b "true" pour "tache terminee" ; "false" pour "tache non terminee"
-//	 */
-//	public void setTacheTerminee(boolean b){
-//		Enumeration<Integer> e = this.tables.keys();
-//		// On parcoure toutes les tables de la salle.
-//		while(e.hasMoreElements())
-//			this.tables.get(e.nextElement()).setTacheTerminee(b);
-//	}
-//	
-//	/**
-//	 * Renvoi la multiplication (au sens &&) de l'attribut "tacheTerminee" de toutes les tables.
-//	 * 		- à "true", toutes les tables ont terminées leur tache.
-//	 * 		- à "false", une/des table(s) n'ont pas terminée(s) leur tache.
-//	 * @return Renvoi l'état générale de la salle.
-//	 */
-//	public boolean getTacheTerminee(){
-//		Enumeration<Integer> e = this.tables.keys();
-//		boolean res = true ;
-//		// On parcoure toutes les tables de la salle.
-//		while(e.hasMoreElements())
-//			res = res && this.tables.get(e.nextElement()).getTacheTerminee();
-//			// On "multiplie" les attributs "tacheTerminee" des tables de la salle.
-//		return res ;
-//	}
-	
 	public void setSemaphore(Semaphore sem){
 		Enumeration<Integer> e =  this.tables.keys();
 		while(e.hasMoreElements()){
