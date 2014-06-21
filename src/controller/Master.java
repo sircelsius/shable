@@ -244,7 +244,16 @@ public class Master {
 		
 		salle.afficher(TO);
 		
+		Hashtable<Integer, String> h = new Hashtable<Integer, String>();
+		Enumeration<String> e = classe.getEleves().keys();
+		for (int j = 0; j < TO.size(); j++) {
+			h.put(TO.get(j), e.nextElement());
+		}
+		for (int j = 0; j < TL.size(); j++) {
+			h.put(TL.get(j), "Place vide");
+		}
 		
+		System.out.println(h.toString());
 		
 		return new Hashtable<Integer, String>();
 		
