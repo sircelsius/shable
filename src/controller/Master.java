@@ -13,7 +13,7 @@ import modele.Salle;
 import modele.Table;
 
 public class Master {
-	public static void main(String[] args) {
+	public static void shable(boolean logactive, int t_min) {
 		System.out.println("Commencement de Master");
 		
 		//On commence par créer et remplir une classe d'élèves, puis une salle de tables. 
@@ -130,7 +130,7 @@ public class Master {
 		salle.afficher(tableauCoefficientTricheTrie);
 		
 		double temperature = 100;				// Paramètre classique du RC
-		double t_min = 75;							// Condition d'arrêt
+		//double t_min = 75;							// Condition d'arrêt
 		int rand_libre;							// Permet de selectionner avec une probabilité plus élevé une table qui a un fort coefficient de triche.
 		int compteur = 1;						// Participe au calcul de la proba ci dessus
 		double rand_rs;			// Permet de selectionner avec une probabilité une solution dont l'énergie est plus élevée que l'actuel.
@@ -237,7 +237,10 @@ public class Master {
 		
 		}
 		
+		
 		salle.afficher(TO);
+		
+		
 		
 		
 		
