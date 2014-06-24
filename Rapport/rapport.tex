@@ -145,13 +145,11 @@ Afin de répondre à ce problème, il nous a donc été nécessaire de réunir n
 \section*{Complexité du problème}
 \addcontentsline{toc}{section}{Complexité du problème}
 
-Dans cette partie introductive, nous retranscrirons notre analyse initiale du problème avant d'analyser les conséquences algorithmiques qui ont découlé.
+Dans cette introduction, nous expliquerons notre analyse (compréhension) du problème, puis les la manière dont nous avons décider de structure le code de notre application.
 
-Considérons le cas trivial suivant: comment placer 4 élèves dans une salle rectangulaire avec \texttt{p} tables réparties equitablement?
+Le problème peut paraitre simple, lorsque l'on considère par exemple le placement de 4 élèves dans une salle rectangulaire avec \texttt{p} tables réparties equitablement.
 
-Cette question est totalement triviale. de même, on peut aisément augmenter le nombre d'élèves légèrement et arriver à des solutions élégantes.
-
-Cependant, le problème devient rapidement beaucoup plus complexe lorsque l'on change la géométrie de la salle ou que l'on augmente grandement le nombre d'élèves (essayer de placer 20 élèves dans une salle polygonale avec des tables réparties aléatoirement est loin d'être trivial!)
+Cependant, le problème devient rapidement beaucoup plus complexe lorsque l'on change la géométrie de la salle ou que l'on augmente grandement le nombre d'élèves.
 
 \section*{Recherche d'un algorithme}
 \addcontentsline{toc}{section}{Recherche d'un algorithme}
@@ -226,10 +224,14 @@ Il est illégal de lancer plusieurs fois la méthode \texttt{start()} sur un Thr
 Cette sémaphore agit donc comme un élément bloquant l'execution du thread principal \texttt{Master} tant que nos calculs répartis dans nos tables ne sont pas terminés.
 \end{itemize}
 
-Concernant la communication de l'information entre nos tables, nous avons premièrement pensé inclure un attribut \texttt{Classe} dans nos \texttt{Table}, permettant ainsi à toutes tables de pouvoir acceder aux informations des voisines (la table voisine est-elle occupée ou non ? Quelles sont ses coordonnées ?). Toutefois cette solution présentait le problème d'un accès concurrent à notre instance de \texttt{Classe} et ses attributs (des tables qui se posent des questions).
+Concernant la communication de l'information entre nos tables, nous avons premièrement pensé inclure un attribut \texttt{Classe} dans nos \texttt{Table}, permettant ainsi à toutes tables de pouvoir acceder aux informations des voisines (la table voisine est-elle occupée ou non ? Quelles sont ses coordonnées ?). Toutefois cette solution présentait le problème d'un accès concurrent à notre instance de \texttt{Classe} et ses attributs (ses attributs sont des tables, qui se posent des questions entre elles).
 
 Nous aurions aussi pu transmettre uniquement les informations utiles (comme TO, TL, tx, ty) à nos \texttt{Table}, et réutiliser le mécanisme de Mutex dessus.
-Nous avons préféré faire une copie par valeur (et non par références) de ces informations dans des attributs de la table, ainsi chaque table à ses informations et peut travailler tranquillement.
+Nous avons préféré faire une copie par valeur (et non par références) de ces informations dans des attributs de la table, ainsi chaque table à ses informations et peut travailler tranquillement (voir méthode récupérerInformation()).
+
+\subsection{Classe Salle}
+
+La classe Salle, est à la base le conteneur d'une collection de Table. Ses méthodes sont principalement utilisées pour controler avec facilité les nombreuses Tables (Threads) : changer à toutes leur futur ordre, déclencher l'execution de ces derniers, etc. Toutes les fonctions nécessaires à l'algorithme du Recuit Simulé sont aussi présentes, permettant par exemple de faire des moyennes de distances, des calculs sur des Hashtables etc. C'est en fait ici que nous avons déposé la plupart de nos outils.
 
 \begin{verbatim}
     PROCEDURE initialiser(Classe classe, Salle salle)
