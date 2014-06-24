@@ -104,7 +104,7 @@ public class Table implements Runnable{
 	private void calculDistanceTablesOccupees(){
 		int taille = this.TO.size();
 		double a = 0 ;
-		for(int i = 0 ; i < taille ; i++ ){
+		for(int i = 0 ; i < taille-1 ; i++ ){
 			a = hypot((double)(this.ty.get(i) - this.y), ((double)(this.tx.get(i) - this.x)));
 			this.distanceAuxTablesOccupees.put(this.TO.get(i), a);
 			//System.out.println("Ma distance à la table :"+a);

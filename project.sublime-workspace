@@ -19,7 +19,7 @@
 			"file": "src/modele/Classe.java",
 			"settings":
 			{
-				"buffer_size": 252,
+				"buffer_size": 372,
 				"line_ending": "Unix"
 			}
 		},
@@ -27,7 +27,7 @@
 			"file": "src/modele/Createur.java",
 			"settings":
 			{
-				"buffer_size": 3589,
+				"buffer_size": 3828,
 				"line_ending": "Unix"
 			}
 		},
@@ -40,10 +40,18 @@
 			}
 		},
 		{
+			"file": "src/controller/Master.java",
+			"settings":
+			{
+				"buffer_size": 10338,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "src/modele/Ordre.java",
 			"settings":
 			{
-				"buffer_size": 451,
+				"buffer_size": 452,
 				"line_ending": "Unix"
 			}
 		},
@@ -51,7 +59,7 @@
 			"file": "src/modele/Salle.java",
 			"settings":
 			{
-				"buffer_size": 939,
+				"buffer_size": 8073,
 				"line_ending": "Unix"
 			}
 		},
@@ -67,7 +75,7 @@
 			"file": "src/modele/Table.java",
 			"settings":
 			{
-				"buffer_size": 1993,
+				"buffer_size": 5742,
 				"line_ending": "Unix"
 			}
 		},
@@ -78,21 +86,37 @@
 				"buffer_size": 3682,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "Rapport/rapport.tex",
+			"settings":
+			{
+				"buffer_size": 23971,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 211.0,
+		"height": 391.0,
 		"selected_items":
 		[
 			[
-				"projec",
-				"Project: Save As"
-			],
-			[
 				"save",
 				"File: Save All"
+			],
+			[
+				"sav",
+				"File: Save All"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"projec",
+				"Project: Save As"
 			],
 			[
 				"inde",
@@ -197,10 +221,6 @@
 			[
 				"shel",
 				"Set Syntax: Shell Script (Bash)"
-			],
-			[
-				"instal",
-				"Package Control: Install Package"
 			],
 			[
 				"pack",
@@ -320,6 +340,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"/home/mboucheron/Documents/travail/ShableLeRetour/src/",
 			"/home/mboucheron/Documents/travail/ShableLeRetour/",
 			"/home/mboucheron/Documents/Kazaden/kazaden_site_repo/KazadenSite/web-app/less/"
 		]
@@ -329,6 +350,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"notify",
+			"nitfy",
 			"result_tables",
 			"result_students",
 			"\\r",
@@ -356,7 +379,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -365,7 +388,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 252,
+						"buffer_size": 372,
 						"regions":
 						{
 						},
@@ -379,13 +402,14 @@
 						"settings":
 						{
 							"origin_encoding": "ASCII",
-							"syntax": "Packages/Java/Java.tmLanguage"
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -394,7 +418,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3589,
+						"buffer_size": 3828,
 						"regions":
 						{
 						},
@@ -415,7 +439,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -445,16 +469,46 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
+					"file": "src/controller/Master.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10338,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "UTF-8",
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4032.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "src/modele/Ordre.java",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 451,
+						"buffer_size": 452,
 						"regions":
 						{
 						},
@@ -474,24 +528,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "src/modele/Salle.java",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 939,
+						"buffer_size": 8073,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								591,
-								591
+								2553,
+								2553
 							]
 						],
 						"settings":
@@ -500,15 +554,15 @@
 							"syntax": "Packages/Java/Java.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 432.0,
+						"translation.x": 31.0,
+						"translation.y": 1080.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "WebContent/WEB-INF/private/dashboard.jsp",
 					"semi_transient": false,
 					"settings":
@@ -535,24 +589,30 @@
 						"translation.y": 2592.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 5,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "src/modele/Table.java",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1993,
+						"buffer_size": 5742,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2198,
+								2198
 							]
 						],
 						"settings":
@@ -562,20 +622,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1404.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "src/controller/Dashboard.java",
 					"semi_transient": false,
 					"settings":
@@ -601,6 +655,37 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 432.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Rapport/rapport.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 23971,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "UTF-8",
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 8118.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
