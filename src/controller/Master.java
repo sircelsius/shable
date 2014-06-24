@@ -7,7 +7,7 @@ import java.util.Hashtable;
 
 import modele.Classe;
 import modele.Createur;
-import modele.Eleve;
+//import modele.Eleve;
 import modele.Ordre;
 import modele.Salle;
 import modele.Table;
@@ -130,6 +130,7 @@ public class Master {
 		tableauCoefficientTricheTrie = salle.triTables(tableauCoefficientTriche);
 		salle.afficher(tableauCoefficientTricheTrie);
 		
+		
 		double temperature = 100;				// Paramètre classique du RC
 		double t_min = 75;							// Condition d'arrêt
 		int rand_libre;							// Permet de selectionner avec une probabilité plus élevé une table qui a un fort coefficient de triche.
@@ -137,6 +138,9 @@ public class Master {
 		double rand_rs;			// Permet de selectionner avec une probabilité une solution dont l'énergie est plus élevée que l'actuel.
 //		Table t = salle.tables.get(TO.get(0));	
 //		Salle s_temp = salle;
+		float efficacite = 0;
+		int iteration_recuis = 0;
+		int iteration_success = 0;
 		
 		double e0 = energie;
 		double e_temp = e0;
@@ -156,7 +160,9 @@ public class Master {
 		}
 		
 		while(temperature > t_min){
-			System.out.println("Temp : "+temperature+" Energie : "+e_temp_1);
+			iteration_recuis++;
+			System.out.println("Itération " + iteration_recuis + ".");
+			System.out.println("Température : "+temperature+" Energie : "+e_temp_1);
 		// Selection d'une table de TO au hasard parmi les 20% les plus chères
 		rand_rs = Math.random(); // rand_rs in [0,1)
 		
@@ -195,6 +201,7 @@ public class Master {
 		e_temp_1 = salle.calculerEnergie(TO_temp);
 		
 		if (e_temp_1 < e_temp) {
+			iteration_success++;
 			TO = TO_temp;
 			TL = TL_temp;
 			e_temp = e_temp_1;
@@ -234,10 +241,26 @@ public class Master {
 				sem.release(nbTables);
 				
 			}
-			temperature -= 0.3;
+			temperature -= 0.1;
 		}
 		
 		}
+		
+		System.out.println("\n_______________________________");
+		System.out.println("\n\nALGORITHME TERMINE AVEC SUCCES\n\n");
+		System.out.println("_______________________________\n");
+		
+		double optimisation = 0;
+		
+		optimisation =(float) (e0 - e_temp)/(e0);
+		
+		efficacite = (float) (iteration_success)/(iteration_recuis);
+		
+		
+		
+		System.out.println("Iterations effectuées: " + iteration_recuis + "\nItérations réussies : " + iteration_success);
+		System.out.println("Efficacité des itérations :" + efficacite);
+		System.out.println("\nEfficacité de l'algorithme : " + optimisation);
 		
 		salle.afficher(TO);
 		
