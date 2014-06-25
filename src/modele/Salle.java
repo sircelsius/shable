@@ -39,10 +39,10 @@ public class Salle {
 	public void declencher(Ordre ordre){
 		this.setOrdre(ordre);
             synchronized (declencheur) {
-                declencheur.notifyAll();
-                declencheur.notifyAll();
-                declencheur.notifyAll();
-                declencheur.notifyAll();
+            	for (int i = 0; i < tables.size(); i++) {
+            		declencheur.notifyAll();
+				}
+              
             }
 	}
 	

@@ -43,7 +43,7 @@
 			"file": "src/controller/Master.java",
 			"settings":
 			{
-				"buffer_size": 10338,
+				"buffer_size": 9610,
 				"line_ending": "Unix"
 			}
 		},
@@ -59,7 +59,7 @@
 			"file": "src/modele/Salle.java",
 			"settings":
 			{
-				"buffer_size": 8073,
+				"buffer_size": 5874,
 				"line_ending": "Unix"
 			}
 		},
@@ -75,7 +75,7 @@
 			"file": "src/modele/Table.java",
 			"settings":
 			{
-				"buffer_size": 5742,
+				"buffer_size": 5744,
 				"line_ending": "Unix"
 			}
 		},
@@ -88,10 +88,10 @@
 			}
 		},
 		{
-			"file": "Rapport/rapport.tex",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 23971,
+				"buffer_size": 1273,
 				"line_ending": "Unix"
 			}
 		}
@@ -248,6 +248,7 @@
 	},
 	"file_history":
 	[
+		"/home/mboucheron/Documents/travail/ShableLeRetour/Rapport/rapport.tex",
 		"/home/mboucheron/Documents/travail/ShableLeRetour/WebContent/WEB-INF/private/.fuse_hidden0000431500000006",
 		"/home/mboucheron/Documents/travail/ShableLeRetour/src/controller/Dashboard.java",
 		"/home/mboucheron/Documents/travail/ShableLeRetour/WebContent/WEB-INF/private/dashboard.jsp",
@@ -478,7 +479,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10338,
+						"buffer_size": 9610,
 						"regions":
 						{
 						},
@@ -499,7 +500,7 @@
 						"translation.y": 4032.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -537,15 +538,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8073,
+						"buffer_size": 5874,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2553,
-								2553
+								0,
+								0
 							]
 						],
 						"settings":
@@ -604,15 +605,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5742,
+						"buffer_size": 5744,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2198,
-								2198
+								0,
+								0
 							]
 						],
 						"settings":
@@ -641,8 +642,8 @@
 						"selection":
 						[
 							[
-								899,
-								899
+								851,
+								851
 							]
 						],
 						"settings":
@@ -657,35 +658,33 @@
 						"translation.y": 432.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 9,
-					"file": "Rapport/rapport.tex",
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 23971,
+						"buffer_size": 1273,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								38,
+								38
 							]
 						],
 						"settings":
 						{
-							"origin_encoding": "UTF-8",
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/Jekyll/Syntaxes/Markdown (Jekyll).tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 8118.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -751,6 +750,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"read",
+				"README.md"
+			],
 			[
 				"dashboard",
 				"WebContent/WEB-INF/private/dashboard.jsp"

@@ -15,8 +15,10 @@ import modele.Table;
 public class Master {
 	//public static void shable(boolean logactive, int t_min) {
 	public static void main(String args[]){
-		System.out.println("Commencement de Master");
-		
+		boolean logactive = false;
+		if(logactive){
+			System.out.println("Commencement de Master");
+		}
 		//On commence par créer et remplir une classe d'élèves, puis une salle de tables. 
 		Salle salle = Createur.creationSalle();
 		Classe classe = Createur.creationClasse();
@@ -80,7 +82,9 @@ public class Master {
 			 * Cet Id correpsond à la table la plus isolée.
 			 */
 			int idTableIsolee = salle.getTableIsolee();
-			System.out.println("Iteration "+(i+1)+" La table la plus isolée est "+idTableIsolee);
+			if(logactive){
+				System.out.println("Iteration "+(i+1)+" La table la plus isolée est "+idTableIsolee);
+			}
 			// On ajoute/retire ensuite cette table à la liste des tables occupées (TO)/tables libres (TL).
 			TO.add((Integer)idTableIsolee);
 			TL.remove((Integer)idTableIsolee);
@@ -89,7 +93,9 @@ public class Master {
 		}
 		
 		
-		System.out.println("PHASE D'INITIALISATION TERMINÉE.");
+		if(logactive){
+			System.out.println("PHASE D'INITIALISATION TERMINÉE.");
+		}
 		/*
 		 * On affiche ensuite le résultat.
 		 */
@@ -116,7 +122,9 @@ public class Master {
 		sem.release(nbTables);
 		// On calcul l'énergie.	
 		double energie  = salle.calculerEnergie(TO);
+		if(logactive)
 		System.out.println("Valeur de l'énergie : "+energie);
+		
 		Hashtable<Integer, Double> tableauCoefficientTriche ;
 		ArrayList<Integer> tableauCoefficientTricheTrie ;
 		
@@ -160,9 +168,12 @@ public class Master {
 		}
 		
 		while(temperature > t_min){
-			iteration_recuis++;
-			System.out.println("Itération " + iteration_recuis + ".");
-			System.out.println("Température : "+temperature+" Energie : "+e_temp_1);
+			iteration_recuis++; // pour connaître le nombre d'itérations effectuées
+			
+			if(logactive){
+				System.out.println("Itération " + iteration_recuis + ".");
+				System.out.println("Température : "+temperature+" Energie : "+e_temp_1);
+			}
 		// Selection d'une table de TO au hasard parmi les 20% les plus chères
 		rand_rs = Math.random(); // rand_rs in [0,1)
 		
@@ -181,8 +192,10 @@ public class Master {
 		rand_libre = (int) (Math.random()*(TL.size()+1)); // rand_libre in [0;TL.size()+1[
 		
 		TL_temp.add(TO_temp.get(compteur));
+		System.out.println("La table " + TO_temp.get(compteur) + " devient libre.");
 		TO_temp.remove(compteur); // on enlève la table sélectionnée dans TO
 		TO_temp.add(TL.get((int)rand_libre)); // on rajoute la table sélectionnée dans TL
+		System.out.println("La table " + TL.get((int) rand_libre) + " devient occupée.");
 		TL_temp.remove((int)rand_libre);
 		
 		salle.envoyerInformation(TO);
